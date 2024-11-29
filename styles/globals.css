@@ -247,6 +247,7 @@ button {
 .transparent-img-input{
   background-color: #068D87;
   opacity: 40%;
+  max-height: 200px;
 
 }
 
@@ -257,6 +258,8 @@ button {
   width: 20%;
   align-self: flex-start;
 }
+
+
 .vehicle{
   height: 100px;
   width: 100px;

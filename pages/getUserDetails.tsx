@@ -321,15 +321,15 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             className="mb-2 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => setName(e.target.value)}
                           />
-                          <select
-                            className="mb-2 py-3 px-3 w-100 transparent-input"
+
+<input
+                            type="text"
                             required
-                            onChange={(e) => setGender(e.target.value)}
-                          >
-                            <option value="">Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                          </select>
+                            placeholder="Email"
+                            className="mb-2 py-3 px-3 w-100 transparent-input"
+                            onChange={(e) => setName(e.target.value)}
+                          />
+                          
                           <input
                             type="text"
                             required
@@ -511,32 +511,35 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
 
 
-                          {/* <label className="d-flex flex-row text-white text-start px-3 mt-2">
+                          
+
+                          <div className='vehicle-row'>
+                            <p className='text-white'>Select Your Vehicle</p>
+                            <div className='column vehicle-img-column' >
+                                <a href=""><img className='vehicle mx-2' src="/seylan/vehicle_types/Benz.png" alt="" /></a>
+                                 <a href=""><img className='vehicle mx-2' src="/seylan/vehicle_types/BMW.png" alt="" /></a> 
+                                 <a href=""><img className='vehicle mx-2' src="/seylan/vehicle_types/ferrari.png" alt="" /></a> 
+                                 <a href=""><img className='vehicle mx-2' src="/seylan/vehicle_types/Lambogini.png" alt="" /></a> 
+                                 <a href=""><img className='vehicle mx-2' src="/seylan/vehicle_types/porche.png" alt="" /></a> 
+                                  
+                            </div>
+                          </div>
+
+                          <label className="d-flex flex-row text-white text-start px-3 mt-2">
                             <input
-                              type="select"
+                              type="checkbox"
                               className="checkbox-style me-2"
                               
                               onChange={handleCheckboxChange}
                               required
                             />
-                            <p> Select Your Car</p>
-                          </label> */}
-                          {/* {phoneNoAttempt && (
+                            <p> I hereby agree to the terms and conditions</p>
+                          </label> 
+                           {phoneNoAttempt && (
                             <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">
                               {phoneNoAttemptMsg}
                             </span>
-                          )} */}
-
-                          <div>
-                            <p className='text-white'>Select Your Vehicle</p>
-                            <div className='column'>
-                                  <img className='vehicle mx-2' src="/seylan/vehicle_types/Benz.png" alt="" />
-                                  <img className='vehicle mx-2' src="/seylan/vehicle_types/BMW.png" alt="" />
-                                  <img className='vehicle mx-2' src="/seylan/vehicle_types/ferrari.png" alt="" />
-                                  <img className='vehicle mx-2' src="/seylan/vehicle_types/Lambogini.png" alt="" />
-                                  
-                            </div>
-                          </div>
+                          )}
 
                           <button
                             className="submit-btn text-center d-flex justify-content-center align-items-center my-3 px-3"
