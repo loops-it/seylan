@@ -39,6 +39,8 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
   const router = useRouter();
 
+  
+
   // get latest dir and update variables
   useEffect(() => {}, [
     name,
@@ -317,12 +319,22 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                           <input
                             type="text"
                             required
-                            placeholder="Name"
+                            placeholder="Gender"
                             className="mb-2 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => setName(e.target.value)}
                           />
 
-<input
+                            <select
+                            className="mb-2 py-3 px-3 w-100 transparent-input"
+                            required
+                            onChange={(e) => setCountry(e.target.value)}
+                          >
+                            <option value="Male">Male</option>, , , , , , , , , , 
+                            <option value="Doctor">Female</option>
+                            
+                          </select>
+
+                          <input
                             type="text"
                             required
                             placeholder="Email"
@@ -515,14 +527,14 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
                           <div className='vehicle-row'>
                             <p className='text-white'>Select Your Vehicle</p>
-                            <div className='column vehicle-img-column' >
-                                <a href=""><img className='vehicle mx-2' src="/seylan/vehicle_types/Benz.png" alt="" /></a>
-                                 <a href=""><img className='vehicle mx-2' src="/seylan/vehicle_types/BMW.png" alt="" /></a> 
-                                 <a href=""><img className='vehicle mx-2' src="/seylan/vehicle_types/ferrari.png" alt="" /></a> 
-                                 <a href=""><img className='vehicle mx-2' src="/seylan/vehicle_types/Lambogini.png" alt="" /></a> 
-                                 <a href=""><img className='vehicle mx-2' src="/seylan/vehicle_types/porche.png" alt="" /></a> 
-                                  
+                            <div className="column">
+                              <img src="/seylan/vehicle_types/Benz.png" alt="Benz" className="vehicle" />
+                              <img src="/seylan/vehicle_types/BMW.png" alt="BMW" className="vehicle" />
+                              <img src="/seylan/vehicle_types/ferrari.png" alt="Ferrari" className="vehicle" />
+                              <img src="/seylan/vehicle_types/Lambogini.png" alt="Lamborghini" className="vehicle" />
+                              <img src="/seylan/vehicle_types/porche.png" alt="Porsche" className="vehicle" />
                             </div>
+
                           </div>
 
                           <label className="d-flex flex-row text-white text-start px-3 mt-2">
@@ -578,5 +590,18 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return { props };
   }
 };
+
+document.querySelectorAll('.vehicle').forEach((img) => {
+  img.addEventListener('click', () => {
+    
+    document.querySelectorAll('.vehicle').forEach((img) => {
+      img.classList.remove('selected');
+    });
+
+    
+    img.classList.add('selected');
+  });
+});
+
 
 export default UserDetails;

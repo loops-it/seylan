@@ -258,12 +258,19 @@ button {
   width: 20%;
   align-self: flex-start;
 }
-
-
-.vehicle{
+.vehicle {
   height: 100px;
   width: 100px;
+  margin: 5px;
+  cursor: pointer;
+  transition: border 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
+
+.vehicle.selected {
+  border: 3px solid #c55f5f;
+  border-radius: 8px;
+}
+
 .user-form{
   padding-left: 5rem;
   padding-right: 3rem;
