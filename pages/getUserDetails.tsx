@@ -364,7 +364,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             required
                             onChange={(e) => setCountry(e.target.value)}
                           >
-                            <option value="">Proffesion</option>, , , , , , , , , , 
+                            <option value="">Profession</option>
                             <option value="Doctor">Doctor</option>
                             <option value="Engineer">Engineer</option>
                             <option value="teacher">teacher</option>
