@@ -53,7 +53,7 @@ const Gallery = () => {
                                     {images.map((image: Image) => (
                                         <div className="p-2" key={image.id}>
                                             <Link href={"/view-image/" + image.image_id}>
-                                                <Image src={"https://dashboard2.yourvibe.lk/final_images/" + image.final_image} className='mb-5' alt='' width={200} height={200} ></Image>
+                                                <Image src='' className='mb-5' alt='' width={200} height={200} ></Image>
                                             </Link>
                                         </div>
                                     ))}

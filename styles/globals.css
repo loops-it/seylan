@@ -105,11 +105,11 @@ button {
   padding-bottom: var(--space-vertical) !important;
 }
 #upload-input{
-  width: 200px !important;
+  width: 100% !important;
   align-self: center !important;
 }
 .background_home {
-  background-image: url("/home_bg.png");
+  background-image: url("/seylan/bg-home.png");
   background-position: top left;
   background-size: cover;
   background-repeat: no-repeat;
@@ -120,7 +120,7 @@ button {
 }
 
 .background_user_details {
-  background-image: url("/bg-details.png");
+  background-image: url("/seylan/form.jpg");
   background-position: top left;
   background-size: cover;
   background-repeat: no-repeat;
@@ -175,8 +175,8 @@ button {
   width: 70vw;
   border-radius: 25px;
   filter: drop-shadow(0px 3px 2.5px rgba(0, 0, 0, 0.61));
-  background-color: #ffffff1f;
-  border: 3px solid #fd824b;
+  /* background-color: #ffffff1f;
+  border: 3px solid #fd824b; */
   position: relative;
 }
 
@@ -244,6 +244,30 @@ button {
   color: #fff !important;
 }
 
+.transparent-img-input{
+  background-color: #068D87;
+  opacity: 40%;
+
+}
+
+.vehicle-box{
+  /* border: 2px solid white;
+  border-radius: 8px; */
+  height: 80px;
+  width: 20%;
+  align-self: flex-start;
+}
+.vehicle{
+  height: 100px;
+  width: 100px;
+}
+.user-form{
+  padding-left: 5rem;
+  padding-right: 3rem;
+}
+.transparent-img-input{
+  background-color: #068D87 !important; 
+}
 .hidden-file-input {
   position: relative;
 }
@@ -419,7 +443,7 @@ option {
 }
 
 .home-txt-container {
-  width: 50%;
+  width: 60%;
 }
 
 .sinhala-txt {
@@ -466,12 +490,12 @@ option {
 .nav-link {
   width: 100px;
   font-family: var(--font-primary-nunito);
-  font-size: 18px;
+  font-size: 29px;
   font-weight: 900;
   line-height: 40px;
   font-style: normal;
   text-align: left;
-  color: #fff !important;
+  color: var(--color-black);
 }
 
 .navbar-brand {
@@ -672,7 +696,11 @@ button {
 .home_slider_container {
   width: 100vw;
 }
-
+.home-text{
+  font-size: 90px;
+  color: #fff;
+  font-family: oswald;
+}
 .home_slider_image_container {
   width: 100vw;
 }

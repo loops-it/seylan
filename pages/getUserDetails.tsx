@@ -312,12 +312,12 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                         </h2>
                         <form
                           onSubmit={handleSubmit}
-                          className=" col-12   px-2 px-lg-5 mt-2 mb-5 d-flex flex-column justify-content-center align-items-center"
+                          className=" col-12 user-form  mt-2 mb-5 d-flex flex-column justify-content-center align-items-center"
                         >
                           <input
                             type="text"
                             required
-                            placeholder="Your Name"
+                            placeholder="Name"
                             className="mb-2 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => setName(e.target.value)}
                           />
@@ -333,24 +333,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                           <input
                             type="text"
                             required
-                            placeholder="Your Email"
-                            className="mb-2 py-3 px-3 w-100 transparent-input"
-                            onChange={(e) => {
-                              setEmail(e.target.value);
-                              setEmailError('');
-                            }}
-                            onBlur={(e) => validateEmail(e.target.value)}
-                          />
-                          {/* onBlur={(e) => validateEmail(e.target.value)} */}
-                          {emailError && (
-                            <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">
-                              {emailError}
-                            </span>
-                          )}
-                          <input
-                            type="text"
-                            required
-                            placeholder="Your WhatsApp Phone Number"
+                            placeholder="Your Whatsapp Number"
                             className="mb-2 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => {
                               setPhoneNo(e.target.value);
@@ -369,31 +352,40 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             required
                             onChange={(e) => setCountry(e.target.value)}
                           >
-                            <option value="">Select Your Country</option>
-                            <option value="Sri Lanka">Sri Lanka</option>
-                            <option value="United States">United States</option>
-                            <option value="Canada">Canada</option>
-                            <option value="India">India</option>
-                            <option value="United Kingdom">
-                              United Kingdom
-                            </option>
-                            <option value="Australia">Australia</option>
-                            <option value="France">France</option>
-                            <option value="Germany">Germany</option>
-                            <option value="Japan">Japan</option>
-                            <option value="China">China</option>
+                            <option value="">Proffesion</option>, , , , , , , , , , 
+                            <option value="Doctor">Doctor</option>
+                            <option value="Engineer">Engineer</option>
+                            <option value="teacher">teacher</option>
+                            <option value="nurse">nurse</option>
+                            <option value="gamer">gamer</option>
+                            <option value="architect">architect</option>
+                            <option value="accountant">accountant</option>
+                            <option value="musician">musician</option>
+                            <option value="dancer">dancer</option>
+                            <option value="actor">actor</option>
+                            <option value="military">military</option>
                           </select>
-                          <input
+                          
+                          {/* <input
                             type="text"
                             required
-                            placeholder="Your Ambition"
-                            spellCheck={true}
-                            className={`mb-2 py-3 px-3 w-100 transparent-input `}//${spellError ? 'spell-error' : ''}
+                            placeholder="Email"
+                            className="mb-2 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => {
-                                setAmbition(e.target.value);
-                                // setSpellError(e.target.spellcheck === false);
-                              }}
-                          />
+                              setEmail(e.target.value);
+                              setEmailError('');
+                            }}
+                            onBlur={(e) => validateEmail(e.target.value)}
+                          /> */}
+                          {/* onBlur={(e) => validateEmail(e.target.value)} */}
+                          {/* {emailError && (
+                            <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">
+                              {emailError}
+                            </span>
+                          )} */}
+                          
+                          
+                          
                           {/* {spellError && (
                             <span className="spell-error-message error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">
                               Please check your spelling.
@@ -460,7 +452,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                                         </div>
                                                     </label> */}
                           <div className="d-flex flex-column-reverse flex-lg-row">
-                            <div className="col-12 col-lg-9">
+                            <div className="col-12 ">
                             <label
                             htmlFor="upload-input"
                             className="hidden-file-input d-flex justify-content-center"
@@ -472,7 +464,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               id="upload-input"
                               onChange={handleFileChange}
                             />
-                            <div className="d-flex transparent-input flex-column justify-content-center align-items-center py-3">
+                            <div className="d-flex transparent-input transparent-img-input flex-column justify-content-center align-items-center py-3">
                               <div
                                 className="d-flex flex-column rounded justify-content-center align-items-center cursor-pointer"
                                 style={{ width: '200px !important' }}
@@ -493,43 +485,58 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             </div>
                           </label>
                             </div>
-                            <div className="col-12 col-lg-3 p-2">
+                            {/* <div className="col-12 col-lg-3 p-2">
                             <Image src="/sample.jpg" className='' alt='' width={100} height={100} ></Image>
                             <p className='mb-0 text-white text-center'>Sample Image</p>
-                            </div>
+                            </div> */}
                           </div>
                           {fileSizeError && (
                             <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-2">
                               {fileSizeError}
                             </span>
                           )}
+                            {/* <div className="d-flex flex-row text-white text-start px-3 mt-2">
+                              <p>Select Your Dream Vehicle Type</p>
+                            </div>
+                            
+                            <div className="d-flex flex-row vehicle-box text-white text-start px-3 mt-2">
+                                
+                                  <img className='vehicle mx-2' src="/seylan/vehicle_types/Benz.png" alt="" />
+                                  <img className='mx-2' src="/seylan/vehicle_types/BMW.png" alt="" />
+                                  <img className='mx-2' src="/seylan/vehicle_types/ferrari.png" alt="" />
+                                  <img className='mx-2' src="/seylan/vehicle_types/Lambogini.png" alt="" />
+                                  <img className='mx-2' src="/seylan/vehicle_types/porche.png" alt="" />
+                               
+                            </div> */}
 
-                          <label className="d-flex flex-row text-white text-start px-3 mt-2">
+
+
+                          {/* <label className="d-flex flex-row text-white text-start px-3 mt-2">
                             <input
-                              type="checkbox"
+                              type="select"
                               className="checkbox-style me-2"
-                              checked={isChecked}
+                              
                               onChange={handleCheckboxChange}
                               required
                             />
-                            <p>
-                              I agree to the{' '}
-                              <Link
-                                style={{
-                                  color: '#fff !important',
-                                  textDecoration: 'none !important',
-                                }}
-                                href={'/terms-and-conditions'}
-                              >
-                                terms and conditions
-                              </Link>
-                            </p>
-                          </label>
-                          {phoneNoAttempt && (
+                            <p> Select Your Car</p>
+                          </label> */}
+                          {/* {phoneNoAttempt && (
                             <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">
                               {phoneNoAttemptMsg}
                             </span>
-                          )}
+                          )} */}
+
+                          <div>
+                            <p className='text-white'>Select Your Vehicle</p>
+                            <div className='column'>
+                                  <img className='vehicle mx-2' src="/seylan/vehicle_types/Benz.png" alt="" />
+                                  <img className='vehicle mx-2' src="/seylan/vehicle_types/BMW.png" alt="" />
+                                  <img className='vehicle mx-2' src="/seylan/vehicle_types/ferrari.png" alt="" />
+                                  <img className='vehicle mx-2' src="/seylan/vehicle_types/Lambogini.png" alt="" />
+                                  
+                            </div>
+                          </div>
 
                           <button
                             className="submit-btn text-center d-flex justify-content-center align-items-center my-3 px-3"
@@ -542,7 +549,9 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             )}
                           </button>
                         </form>
+                        
                       </div>
+
                     </div>
                   </div>
                 </div>
