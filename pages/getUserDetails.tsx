@@ -576,6 +576,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             </span>
                           )}
 
+                          <Link href={'/success'} className='d-flex justify-content-center align-items-center'>
                           <button
                             className="submit-btn text-center d-flex justify-content-center align-items-center my-3 px-3"
                             type="submit"
@@ -586,6 +587,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               <p className="mb-0">NEXT</p>
                             )}
                           </button>
+                          </Link>
                         </form>
                         
                       </div>
