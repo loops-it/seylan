@@ -20,14 +20,15 @@ const Success = () => {
                 <div className="home_slider_container p-0 m-0 position-relative">
                     <div>
                         <div className="home_slider_image_container min-height d-flex flex-column justify-content-center align-items-center image1 p-2 pt-lg-5 m-0 ">
-                            <div className="d-flex flex-column justify-content-center align-items-center text-center mt-5 pt-5 transparent-select-box">
+                            <div className="d-flex flex-column justify-content-center align-items-center text-center transparent-select-box" style={{marginTop:'280px'}}>
                                 <h2 className="text-white font-36">Thank you</h2>
                                 <p className="text-white font-20 mb-3" style={{fontSize: "22px !important", fontWeight:"600 !important"}}>
-                                Await an AI generated image of your future self! 
+                                Your Image is now being generated and you will receive it shortly via email and Whatsapp
+
                                 </p>
-                                <p className="text-white font-20 mb-3" style={{fontSize: "22px !important", fontWeight:"600 !important"}}>
+                                {/* <p className="text-white font-20 mb-3" style={{fontSize: "22px !important", fontWeight:"600 !important"}}>
                                 Within 48 hours we will be sending it to your e-mail and/or WhatsApp number.
-                                </p>
+                                </p> */}
                                 <Image
                                     src={'/correct.png'}
                                     className="correct-img mb-5"
@@ -37,9 +38,13 @@ const Success = () => {
                                 ></Image>
 
                                 <Link href="/futureDescription" className='d-flex justify-content-center align-items-center'>
-                                    <button className="submit-btn-success my-3 px-3" type="submit">
-                                    Click to see your path to becoming a {ambition}
-                                    </button>
+                                    {/* <button className="submit-btn-success my-3 px-3" type="submit">
+                                   Next {ambition}
+                                    </button> */}
+
+                            <button className="submit-btn text-center d-flex justify-content-center align-items-center my-3 px-3" type="submit">
+                              <p className="mb-0">NEXT</p>
+                            </button>
                                 </Link>
 
                                 {/* <p className="text-white font-18 mb-3">

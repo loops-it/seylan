@@ -93,14 +93,14 @@ export default function Home() {
               }}
             >
               {images.map((image: Image) => (
-                <SwiperSlide key={image.id}>
+                <SwiperSlide key={image.id} style={{padding:'10px'}}>
                   <Link href="#">
                     <Image
                       src={image.src}
                       alt={image.alt}
                       width={250}
                       height={250}
-                      className="img-fluid"
+                      className="img-fluid rounded-3"
                     />
                   </Link>
                 </SwiperSlide>

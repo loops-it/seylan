@@ -34,20 +34,35 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   const [selectedFile, setSelectedFile] = useState<File>();
   const [phoneNoAttempt, setPhoneNoAttempt] = useState(false);
   const [phoneNoAttemptMsg, setPhoneNoAttemptMsg] = useState('');
+  const [selectedCarImage, setSelectedCarImage] = useState('');
+  const [selectedCar, setSelectedCar] = useState(Number);
 
   const [spellError, setSpellError] = useState(false);
   // const [selectedImage, setSelectedImage] = useState<null | string>(null);
 
   const router = useRouter();
 
-  document.querySelectorAll('.vehicle').forEach((img) => {
-    img.addEventListener('click', () => {
-      document.querySelectorAll('.vehicle').forEach((img) => {
-        img.classList.remove('selected');
-      });
-      img.classList.add('selected');
-    });
+  const handleSelectedCarImage = ((imagePath:string, selectedId:number)=>{
+    console.log('this is image path: ',imagePath);
+    console.log('this is image id :',selectedId);
+
+    setSelectedCar(selectedId);
+    setSelectedCarImage(imagePath)
+
   });
+
+  
+
+  // document.querySelectorAll('.vehicle').forEach((img) => {
+  //   img.addEventListener('click', () => {
+  //     document.querySelectorAll('.vehicle').forEach((img) => {
+  //       img.classList.remove('selected');
+  //     });
+  //     img.classList.add('selected');
+  //   });
+  // });
+
+  useState({})
   
 
   // get latest dir and update variables
@@ -318,7 +333,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                     <div className="conlainer-fluid m-0 px-3 px-lg-0 py-3 py-lg-5 my-3 my-lg-5 w-100 d-flex justify-content-center align-items-center">
                       <div className="d-flex flex-column justify-content-center align-items-center text-center mt-5 pt-5 transparent-select-box">
                         <div id="blur_background"></div>
-                        <h2 className="text-white font-36">
+                        <h2 className="text-white font-36 ps-5 ms-5">
                           ENTER YOUR DETAILS
                         </h2>
                         <form
@@ -328,7 +343,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                           <input
                             type="text"
                             required
-                            placeholder="Gender"
+                            placeholder="Name"
                             className="mb-2 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => setName(e.target.value)}
                           />
@@ -534,13 +549,13 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                           
 
                           <div className='vehicle-row'>
-                            <p className='text-white'>Select Your Vehicle</p>
+                            <h6 className='text-white my-4'>Select Your Dream Vehicle Type</h6>
                             <div className="column">
-                              <img src="/seylan/vehicle_types/Benz.png" alt="Benz" className="vehicle" />
-                              <img src="/seylan/vehicle_types/BMW.png" alt="BMW" className="vehicle" />
-                              <img src="/seylan/vehicle_types/ferrari.png" alt="Ferrari" className="vehicle" />
-                              <img src="/seylan/vehicle_types/Lambogini.png" alt="Lamborghini" className="vehicle" />
-                              <img src="/seylan/vehicle_types/porche.png" alt="Porsche" className="vehicle" />
+                              <img onClick={()=>handleSelectedCarImage('/seylan/vehicle_types/Benz.png',1)} src="/seylan/vehicle_types/Benz.png" alt="Benz" className={`vehicle ${selectedCar === 1 ? 'selected' : 1}`} id='1' />
+                              <img onClick= {()=> handleSelectedCarImage('/seylan/vehicle_types/BMW.png',2)} src="/seylan/vehicle_types/BMW.png" alt="BMW" className={`vehicle ${selectedCar === 2 ? 'selected' : 2}`} id='2'/>
+                              <img onClick= {()=> handleSelectedCarImage('/seylan/vehicle_types/Ferrari.png',3)} src="/seylan/vehicle_types/ferrari.png" alt="Ferrari" className={`vehicle ${selectedCar === 3 ? 'selected' : 3}`} id='3'/>
+                              <img onClick= {()=> handleSelectedCarImage('/seylan/vehicle_types/Lamborghini.png',4)} src="/seylan/vehicle_types/Lambogini.png" alt="Lamborghini" className={`vehicle ${selectedCar === 4 ? 'selected' : 4}`} id='4'/>
+                              <img onClick= {()=> handleSelectedCarImage('/seylan/vehicle_types/porche.png',5)} src="/seylan/vehicle_types/porche.png" alt="Porsche" className={`vehicle ${selectedCar === 5 ? 'selected' : 5}`} id='5'/>
                             </div>
 
                           </div>
