@@ -24,7 +24,7 @@ export default function Footer() {
       <div className="d-flex flex-row text-center icon_wrapper py-3 pb-lg-1">
         {/* <a href="#"> */}
           {/* <p className="text-white mb-0" style={{fontSize: "18px"}}> */}
-          <Link href={"/terms-and-conditions"} className="text-white mb-0" style={{textDecoration: "none",fontSize: "18px"}}>Terms and Conditions</Link>
+          <Link href={"#"} className="text-white mb-0" style={{textDecoration: "none",fontSize: "18px"}}>Terms and Conditions</Link>
           {/* </p> */}
         {/* </a> */}
       </div>
