@@ -9,6 +9,7 @@ import path from 'path';
 import { FiUpload } from 'react-icons/fi';
 import Link from 'next/link';
 import Image from 'next/image';
+import Script from 'next/script';
 
 interface Props {
   dirs: string[];
@@ -39,6 +40,14 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
   const router = useRouter();
 
+  document.querySelectorAll('.vehicle').forEach((img) => {
+    img.addEventListener('click', () => {
+      document.querySelectorAll('.vehicle').forEach((img) => {
+        img.classList.remove('selected');
+      });
+      img.classList.add('selected');
+    });
+  });
   
 
   // get latest dir and update variables
@@ -330,7 +339,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             onChange={(e) => setCountry(e.target.value)}
                           >
                             <option value="Male">Male</option>
-                            <option value="Female">Female</option>
+                            <option value="Doctor">Female</option>
                             
                           </select>
 
@@ -364,8 +373,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             required
                             onChange={(e) => setCountry(e.target.value)}
                           >
-                            <option value="">Profession</option>
-                            <option value="Doctor">Doctor</option>
+                            <option value="">Profesion</option>
                             <option value="Engineer">Engineer</option>
                             <option value="teacher">teacher</option>
                             <option value="nurse">nurse</option>
@@ -591,17 +599,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 };
 
-document.querySelectorAll('.vehicle').forEach((img) => {
-  img.addEventListener('click', () => {
-    
-    document.querySelectorAll('.vehicle').forEach((img) => {
-      img.classList.remove('selected');
-    });
 
-    
-    img.classList.add('selected');
-  });
-});
+
+
+
 
 
 export default UserDetails;

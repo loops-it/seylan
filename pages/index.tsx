@@ -44,7 +44,7 @@ export default function Home() {
                   <div className="d-flex flex-column justify-content-center align-items-center home-txt-container">
                     <h2
                       className="text-center px-2 text-white"
-                      style={{ fontWeight: 'bold', fontSize: '20px' }}
+                      style={{ fontWeight: 'bold', fontSize: '20px', marginTop:'150px',width:'67%' }}
                     >
                       At Seylan Bank&apos;s Motor Show, unleash your imagination!
                       Share your dream vehicle idea, and our AI will transform it into a
