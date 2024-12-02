@@ -66,6 +66,7 @@ const ShareImage = () => {
                                                 width={250}
                                                 height={250}
                                                 quality={100}
+                                                priority
                                             />
                                         )}
                                     </div>
