@@ -528,7 +528,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               />
                               <img
                                 onClick={() => handleSelectedCarImage('/seylan/vehicle_types/Ferrari.png', 3, 'Ferrari')}
-                                src="/seylan/vehicle_types/Ferrari.png"
+                                src="/seylan/vehicle_types/ferrari.png"
                                 alt="Ferrari"
                                 className={`vehicle ${selectedCar === 3 ? 'selected' : ''}`}
                                 id='3'
