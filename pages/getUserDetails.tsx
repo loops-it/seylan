@@ -32,6 +32,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   const [selectedImage, setSelectedImage] = useState('');
   const [savedImageUrl, setSavedImageUrl] = useState('');
   const [selectedFile, setSelectedFile] = useState<File>();
+  const [profession, setProfession] = useState('');
   const [phoneNoAttempt, setPhoneNoAttempt] = useState(false);
   const [phoneNoAttemptMsg, setPhoneNoAttemptMsg] = useState('');
   const [selectedCarImage, setSelectedCarImage] = useState('');
@@ -78,16 +79,17 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
     savedImageUrl,
     isChecked,
     selectedFile,
+    profession,
   ]);
 
-  useEffect(() => {
-    if (dirs.length > 0) {
-      const latestDir = dirs[dirs.length - 1];
-      setSavedImageUrl(
-        `https://combank-vibe-bay.vercel.app/images/${latestDir}`,
-      );
-    }
-  }, [dirs]);
+  // useEffect(() => {
+  //   if (dirs.length > 0) {
+  //     const latestDir = dirs[dirs.length - 1];
+  //     setSavedImageUrl(
+  //       `https://combank-vibe-bay.vercel.app/images/${latestDir}`,
+  //     );
+  //   }
+  // }, [dirs]);
 
   // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //     if (event.target.files) {
@@ -190,7 +192,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
           formData.append('savedImageUrl', selectedFile);
           formData.append('name', name);
           formData.append('gender', gender);
-          formData.append('location', country);
+          formData.append('profession', profession);
           formData.append('ambition', ambition);
           formData.append('email', email);
           formData.append('phoneNo', phoneNumberWithoutSpaces);
@@ -205,7 +207,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
             // https://dashboard.yourvibe.lk/api/save-customer-data
           const response = await fetch(
-            'https://dashboard.yourvibe.lk/api/save-customer-data',
+            'https://sites.techvoice.lk/seylan-ai-backend/api/save-customer-data',
             {
               method: 'POST',
               body: formData,
@@ -266,7 +268,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
               console.log('ai message : ', data.result);
 
               const responseAiMessage = await fetch(
-                'https://dashboard.yourvibe.lk/api/save-customer-ambition-response',
+                'https://sites.techvoice.lk/seylan-ai-backend/api/get-image-details',
                 {
                   method: 'POST',
                   headers: {
@@ -351,19 +353,20 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             <select
                             className="mb-2 py-3 px-3 w-100 transparent-input"
                             required
-                            onChange={(e) => setCountry(e.target.value)}
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
                           >
                             <option value="Male">Male</option>
-                            <option value="Doctor">Female</option>
+                            <option value="Female">Female</option>
                             
                           </select>
 
                           <input
-                            type="text"
+                            type="email"
                             required
                             placeholder="Email"
                             className="mb-2 py-3 px-3 w-100 transparent-input"
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                           
                           <input
@@ -386,7 +389,8 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                           <select
                             className="mb-2 py-3 px-3 w-100 transparent-input"
                             required
-                            onChange={(e) => setCountry(e.target.value)}
+                            value={profession}
+                            onChange={(e) => setProfession(e.target.value)}
                           >
                             <option value="">Profesion</option>
                             <option value="Engineer">Engineer</option>
@@ -498,14 +502,16 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               type="file"
                               id="upload-input"
                               onChange={handleFileChange}
+                              style={{maxHeight:'100px',width:'auto'}}
                             />
                             <div className="d-flex transparent-input transparent-img-input flex-column justify-content-center align-items-center py-3">
                               <div
                                 className="d-flex flex-column rounded justify-content-center align-items-center cursor-pointer"
-                                style={{ width: '200px !important' }}
+                                style={{maxHeight:'100px',width:'auto'}}
+
                               >
                                 {selectedImage ? (
-                                  <img src={selectedImage} alt="" />
+                                  <img src={selectedImage} alt="" style={{maxHeight:'100px',width:'auto'}}/>
                                 ) : (
                                   <span
                                     className="text-white mb-2 py-3 px-3 w-100  d-flex flex-column justify-content-center align-items-center"
@@ -576,7 +582,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             </span>
                           )}
 
-                          <Link href={'/success'} className='d-flex justify-content-center align-items-center'>
+                          <div className='d-flex justify-content-center align-items-center'>
                           <button
                             className="submit-btn text-center d-flex justify-content-center align-items-center my-3 px-3"
                             type="submit"
@@ -587,7 +593,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               <p className="mb-0">NEXT</p>
                             )}
                           </button>
-                          </Link>
+                          </div>
                         </form>
                         
                       </div>

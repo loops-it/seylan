@@ -21,7 +21,7 @@ const Gallery = () => {
     useEffect(() => {
         const fetchImages = async () => {
             try {
-                const response = await axios.get('https://dashboard.yourvibe.lk/api/get-gallery-images');
+                const response = await axios.get('https://sites.techvoice.lk/seylan-ai-backend/api/get-gallery-images');
                 setImages(response.data.images);
             } catch (error) {
                 console.error('Error fetching images:', error);
