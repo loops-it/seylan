@@ -46,7 +46,7 @@ export default function Home() {
               <div className="home_slider_image_container image1 p-0 m-0">
                 <div className="d-flex justify-content-center align-items-end w-100 hero-container">
                   <div className="d-flex flex-column justify-content-center align-items-center home-txt-container">
-                    <h1 className="text-center home-text px-2">TURN YOUR DREAM INTO REALITY</h1>
+                    <h1 className="text-center home-text px-2">You Have the Power to Change Your Future with Seylan</h1>
                   </div>
                 </div>
                 <div className="d-flex justify-content-center align-items-center b-space w-100 sub-container">
