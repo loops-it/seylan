@@ -63,8 +63,9 @@ const ShareImage = () => {
                                                 className="mb-5"
                                                 style={{ borderRadius: "15px" }}
                                                 alt="Gallery Image"
-                                                width={200}
-                                                height={200}
+                                                width={250}
+                                                height={250}
+                                                quality={100}
                                             />
                                         )}
                                     </div>
