@@ -7,26 +7,35 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Layout from '@/components/layout';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Image {
-  [x: string]: string;
   id: string;
-  src: string;
-  alt: string;
+  image_url: string;
+  image_id: string;
 }
 
 export default function Home() {
-  const images: Image[] = [
-    { id: '1', src: '/seylan/gallery/gallery-1.png', alt: 'Image 1 description' },
-    { id: '2', src: '/seylan/gallery/gallery-2.png', alt: 'Image 2 description' },
-    { id: '3', src: '/seylan/gallery/gallery-3.png', alt: 'Image 3 description' },
-    { id: '4', src: '/seylan/gallery/gallery-4.png', alt: 'Image 4 description' },
-    { id: '5', src: '/seylan/gallery/gallery-1.png', alt: 'Image 1 description' },
-    { id: '6', src: '/seylan/gallery/gallery-2.png', alt: 'Image 2 description' },
-    { id: '7', src: '/seylan/gallery/gallery-3.png', alt: 'Image 3 description' },
-    { id: '8', src: '/seylan/gallery/gallery-4.png', alt: 'Image 4 description' },
-  ];
+  const [images, setImages] = useState([])
+
+  const getHomepageImages = async() =>{
+    const response = await fetch(
+      'https://sites.techvoice.lk/seylan-ai-backend/api/get-completed-images',
+      {
+        method: 'GET',
+      },
+    );
+
+    console.log(response)
+  }
+
+  useEffect( () => {
+    getHomepageImages()
+
+  
+   }, []);
+
+  
 
   return (
     <>
@@ -92,12 +101,12 @@ export default function Home() {
                 1336: { slidesPerView: 4, spaceBetween: 0 },
               }}
             >
-              {images.map((image: Image) => (
+              {images && images.map((image: Image) => (
                 <SwiperSlide key={image.id} style={{padding:'10px'}}>
                   <Link href="#">
                     <Image
-                      src={image.src}
-                      alt={image.alt}
+                      src={image.image_url}
+                      alt={image.image_id}
                       width={250}
                       height={250}
                       className="img-fluid rounded-3"

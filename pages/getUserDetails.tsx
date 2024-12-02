@@ -19,7 +19,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState('Male');
   const [country, setCountry] = useState('');
   const [ambition, setAmbition] = useState('');
   const [email, setEmail] = useState('');
@@ -37,22 +37,28 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   const [phoneNoAttemptMsg, setPhoneNoAttemptMsg] = useState('');
   const [selectedCarImage, setSelectedCarImage] = useState('');
   const [selectedCar, setSelectedCar] = useState(Number);
+  const [selectedCarName, setSelectedCarName] = useState('');
+
 
   const [spellError, setSpellError] = useState(false);
   // const [selectedImage, setSelectedImage] = useState<null | string>(null);
 
   const router = useRouter();
 
-  const handleSelectedCarImage = ((imagePath:string, selectedId:number)=>{
-    console.log('this is image path: ',imagePath);
-    console.log('this is image id :',selectedId);
+
+  const handleSelectedCarImage = ((imagePath: string, selectedId: number, selectedCarName: string) => {
+    console.log('this is image path: ', imagePath);
+    console.log('this is image id :', selectedId);
+    console.log('this is image car name :', selectedCarName);
+
 
     setSelectedCar(selectedId);
-    setSelectedCarImage(imagePath)
+    setSelectedCarImage(imagePath);
+    setSelectedCarName(selectedCarName);
 
   });
 
-  
+
 
   // document.querySelectorAll('.vehicle').forEach((img) => {
   //   img.addEventListener('click', () => {
@@ -64,10 +70,10 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   // });
 
   useState({})
-  
+
 
   // get latest dir and update variables
-  useEffect(() => {}, [
+  useEffect(() => { }, [
     name,
     gender,
     country,
@@ -193,120 +199,66 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
           formData.append('name', name);
           formData.append('gender', gender);
           formData.append('profession', profession);
-          formData.append('ambition', ambition);
+          // formData.append('ambition', ambition);
           formData.append('email', email);
           formData.append('phoneNo', phoneNumberWithoutSpaces);
+          formData.append('vehicle_type', selectedCarName);
 
           console.log('form data : ', formData);
           // data to backend
 
-          if (validateEmail(email)){
+          if (validateEmail(email)) {
             console.log(
-              `data : ${name} ,${gender} ,${email} , ${phoneNumberWithoutSpaces}, ${ambition} , ${country}, ${selectedFile} `,
+              `data : ${name} ,${gender} ,${email} , ${phoneNumberWithoutSpaces}, ${ambition}, ${profession} , ${country}, ${selectedFile} `,
             );
 
             // https://dashboard.yourvibe.lk/api/save-customer-data
-          const response = await fetch(
-            'https://sites.techvoice.lk/seylan-ai-backend/api/save-customer-data',
-            {
-              method: 'POST',
-              body: formData,
-            },
-          );
-
-          const dataBackend = await response.json();
-          console.log("response: ",dataBackend)
-
-
-          if (response.status !== 200) {
-            throw (
-              dataBackend.error ||
-              new Error(`Request failed with status ${response.status}`)
+            const response = await fetch(
+              'https://sites.techvoice.lk/seylan-ai-backend/api/save-customer-data',
+              {
+                method: 'POST',
+                body: formData,
+              },
             );
-          }
-          
+
+            const dataBackend = await response.json();
+            console.log("response: ", dataBackend)
 
 
-          if (dataBackend.status === 'fail'){
-            setPhoneNoAttempt(true);
-            setPhoneNoAttemptMsg(dataBackend.message);
-            console.log(dataBackend.message);
-          }
-          else{
-            const resCustomerId = dataBackend.id;
-            setResId(resCustomerId);
-            console.log('respons id : ', resCustomerId);
-
-          // chat gpt generate
-          const responseOpenAi = await fetch('/api/generate', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              name: name,
-              location: country,
-              ambition: ambition,
-            }),
-          });
-
-          const data = await responseOpenAi.json();
-          if (responseOpenAi.status !== 200) {
-            throw (
-              data.error ||
-              new Error(`Request failed with status ${responseOpenAi.status}`)
-            );
-          }
-          setAiMessage(data.result);
-          console.log(aiMessage.toString());
-
-          if (data.result && resCustomerId) {
-            console.log('message generted');
-
-            const sendMessage = async () => {
-              console.log('resId : ', resCustomerId);
-              console.log('ai message : ', data.result);
-
-              const responseAiMessage = await fetch(
-                'https://sites.techvoice.lk/seylan-ai-backend/api/get-image-details',
-                {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    customerId: resCustomerId,
-                    ambitionResponse: data.result,
-                  }),
-                },
+            if (response.status !== 200) {
+              throw (
+                dataBackend.error ||
+                new Error(`Request failed with status ${response.status}`)
               );
-
-              const dataAiMessage = await responseAiMessage.json();
-              if (responseAiMessage.status !== 200) {
-                throw (
-                  dataAiMessage.error ||
-                  new Error(
-                    `Request failed with status ${responseAiMessage.status}`,
-                  )
-                );
-              }
-              console.log(dataAiMessage);
-            };
-            sendMessage();
-
-            setIsLoading(false);
-            router.push('/success');
-          }
+            }
 
 
-          
-          }
-          }else {
+
+            if (dataBackend.status === 'fail') {
+              setPhoneNoAttempt(true);
+              setPhoneNoAttemptMsg(dataBackend.message);
+              console.log(dataBackend.message);
+              setIsLoading(false);
+            } else {
+              const resCustomerId = dataBackend.id;
+              setResId(resCustomerId);
+              console.log('respons id : ', resCustomerId);
+
+
+              setIsLoading(false);
+              router.push('/success');
+              return;
+            }
+            return;
+
+
+
+          } else {
             setEmailError('Invalid email address');
             setIsLoading(false);
           }
-          
-          
+
+
         } catch (error) {
           console.error(error);
         }
@@ -350,15 +302,17 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             onChange={(e) => setName(e.target.value)}
                           />
 
-                            <select
+                          <select
+                            name="gender"
                             className="mb-2 py-3 px-3 w-100 transparent-input"
                             required
                             value={gender}
-                            onChange={(e) => setGender(e.target.value)}
+                            onChange={(e) => setGender(e.currentTarget.value)}
+                          // onChange={(e) => console.log(e)}
                           >
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
-                            
+
                           </select>
 
                           <input
@@ -368,7 +322,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             className="mb-2 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => setEmail(e.target.value)}
                           />
-                          
+
                           <input
                             type="text"
                             required
@@ -389,10 +343,11 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                           <select
                             className="mb-2 py-3 px-3 w-100 transparent-input"
                             required
+                            name="proffession"
                             value={profession}
-                            onChange={(e) => setProfession(e.target.value)}
+                            onChange={(e) => setProfession(e.currentTarget.value)}
                           >
-                            <option value="">Profesion</option>
+                            <option value="">Profession</option>
                             <option value="Engineer">Engineer</option>
                             <option value="teacher">teacher</option>
                             <option value="nurse">nurse</option>
@@ -404,7 +359,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             <option value="actor">actor</option>
                             <option value="military">military</option>
                           </select>
-                          
+
                           {/* <input
                             type="text"
                             required
@@ -422,9 +377,9 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               {emailError}
                             </span>
                           )} */}
-                          
-                          
-                          
+
+
+
                           {/* {spellError && (
                             <span className="spell-error-message error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">
                               Please check your spelling.
@@ -492,39 +447,39 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                                     </label> */}
                           <div className="d-flex flex-column-reverse flex-lg-row">
                             <div className="col-12 ">
-                            <label
-                            htmlFor="upload-input"
-                            className="hidden-file-input d-flex justify-content-center"
-                            onDragOver={handleDragOver}
-                            onDrop={handleDrop}
-                          >
-                            <input
-                              type="file"
-                              id="upload-input"
-                              onChange={handleFileChange}
-                              style={{maxHeight:'100px',width:'auto'}}
-                            />
-                            <div className="d-flex transparent-input transparent-img-input flex-column justify-content-center align-items-center py-3">
-                              <div
-                                className="d-flex flex-column rounded justify-content-center align-items-center cursor-pointer"
-                                style={{maxHeight:'100px',width:'auto'}}
-
+                              <label
+                                htmlFor="upload-input"
+                                className="hidden-file-input d-flex justify-content-center"
+                                onDragOver={handleDragOver}
+                                onDrop={handleDrop}
                               >
-                                {selectedImage ? (
-                                  <img src={selectedImage} alt="" style={{maxHeight:'100px',width:'auto'}}/>
-                                ) : (
-                                  <span
-                                    className="text-white mb-2 py-3 px-3 w-100  d-flex flex-column justify-content-center align-items-center"
-                                    style={{ height: '200px !important' }}
+                                <input
+                                  type="file"
+                                  id="upload-input"
+                                  onChange={handleFileChange}
+                                  style={{ maxHeight: '100px', width: 'auto' }}
+                                />
+                                <div className="d-flex transparent-input transparent-img-input flex-column justify-content-center align-items-center py-3">
+                                  <div
+                                    className="d-flex flex-column rounded justify-content-center align-items-center cursor-pointer"
+                                    style={{ maxHeight: '100px', width: 'auto' }}
+
                                   >
-                                    <h5>Drop or Select Image</h5>{' '}
-                                    <p style={{width: "300px !important"}}>(Upload a clear image of you where your features are clearly shown)</p>{' '}
-                                    <FiUpload style={{ width: '35px' }} />
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                          </label>
+                                    {selectedImage ? (
+                                      <img src={selectedImage} alt="" style={{ maxHeight: '100px', width: 'auto' }} />
+                                    ) : (
+                                      <span
+                                        className="text-white mb-2 py-3 px-3 w-100  d-flex flex-column justify-content-center align-items-center"
+                                        style={{ height: '200px !important' }}
+                                      >
+                                        <h5>Drop or Select Image</h5>{' '}
+                                        <p style={{ width: "300px !important" }}>(Upload a clear image of you where your features are clearly shown)</p>{' '}
+                                        <FiUpload style={{ width: '35px' }} />
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              </label>
                             </div>
                             {/* <div className="col-12 col-lg-3 p-2">
                             <Image src="/sample.jpg" className='' alt='' width={100} height={100} ></Image>
@@ -536,7 +491,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               {fileSizeError}
                             </span>
                           )}
-                            {/* <div className="d-flex flex-row text-white text-start px-3 mt-2">
+                          {/* <div className="d-flex flex-row text-white text-start px-3 mt-2">
                               <p>Select Your Dream Vehicle Type</p>
                             </div>
                             
@@ -552,16 +507,46 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
 
 
-                          
+
 
                           <div className='vehicle-row'>
                             <h6 className='text-white my-4'>Select Your Dream Vehicle Type</h6>
                             <div className="column">
-                              <img onClick={()=>handleSelectedCarImage('/seylan/vehicle_types/Benz.png',1)} src="/seylan/vehicle_types/Benz.png" alt="Benz" className={`vehicle ${selectedCar === 1 ? 'selected' : 1}`} id='1' />
-                              <img onClick= {()=> handleSelectedCarImage('/seylan/vehicle_types/BMW.png',2)} src="/seylan/vehicle_types/BMW.png" alt="BMW" className={`vehicle ${selectedCar === 2 ? 'selected' : 2}`} id='2'/>
-                              <img onClick= {()=> handleSelectedCarImage('/seylan/vehicle_types/Ferrari.png',3)} src="/seylan/vehicle_types/ferrari.png" alt="Ferrari" className={`vehicle ${selectedCar === 3 ? 'selected' : 3}`} id='3'/>
-                              <img onClick= {()=> handleSelectedCarImage('/seylan/vehicle_types/Lamborghini.png',4)} src="/seylan/vehicle_types/Lambogini.png" alt="Lamborghini" className={`vehicle ${selectedCar === 4 ? 'selected' : 4}`} id='4'/>
-                              <img onClick= {()=> handleSelectedCarImage('/seylan/vehicle_types/porche.png',5)} src="/seylan/vehicle_types/porche.png" alt="Porsche" className={`vehicle ${selectedCar === 5 ? 'selected' : 5}`} id='5'/>
+                              <img
+                                onClick={() => handleSelectedCarImage('/seylan/vehicle_types/Benz.png', 1, 'Benz')}
+                                src="/seylan/vehicle_types/Benz.png"
+                                alt="Benz"
+                                className={`vehicle ${selectedCar === 1 ? 'selected' : ''}`}
+                                id='1'
+                              />
+                              <img
+                                onClick={() => handleSelectedCarImage('/seylan/vehicle_types/BMW.png', 2, 'BMW')}
+                                src="/seylan/vehicle_types/BMW.png"
+                                alt="BMW"
+                                className={`vehicle ${selectedCar === 2 ? 'selected' : ''}`}
+                                id='2'
+                              />
+                              <img
+                                onClick={() => handleSelectedCarImage('/seylan/vehicle_types/Ferrari.png', 3, 'Ferrari')}
+                                src="/seylan/vehicle_types/Ferrari.png"
+                                alt="Ferrari"
+                                className={`vehicle ${selectedCar === 3 ? 'selected' : ''}`}
+                                id='3'
+                              />
+                              <img
+                                onClick={() => handleSelectedCarImage('/seylan/vehicle_types/Lambogini.png', 4, 'Lamborghini')}
+                                src="/seylan/vehicle_types/Lambogini.png"
+                                alt="Lamborghini"
+                                className={`vehicle ${selectedCar === 4 ? 'selected' : ''}`}
+                                id='4'
+                              />
+                              <img
+                                onClick={() => handleSelectedCarImage('/seylan/vehicle_types/porche.png', 5, 'Porsche')}
+                                src="/seylan/vehicle_types/porche.png"
+                                alt="Porsche"
+                                className={`vehicle ${selectedCar === 5 ? 'selected' : ''}`}
+                                id='5'
+                              />
                             </div>
 
                           </div>
@@ -570,32 +555,32 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             <input
                               type="checkbox"
                               className="checkbox-style me-2"
-                              
+
                               onChange={handleCheckboxChange}
                               required
                             />
                             <p> I hereby agree to the terms and conditions</p>
-                          </label> 
-                           {phoneNoAttempt && (
+                          </label>
+                          {phoneNoAttempt && (
                             <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">
                               {phoneNoAttemptMsg}
                             </span>
                           )}
 
                           <div className='d-flex justify-content-center align-items-center'>
-                          <button
-                            className="submit-btn text-center d-flex justify-content-center align-items-center my-3 px-3"
-                            type="submit"
-                          >
-                            {isLoading ? (
-                              <LoadingDots color="#fff" />
-                            ) : (
-                              <p className="mb-0">NEXT</p>
-                            )}
-                          </button>
+                            <button
+                              className="submit-btn text-center d-flex justify-content-center align-items-center my-3 px-3"
+                              type="submit"
+                            >
+                              {isLoading ? (
+                                <LoadingDots color="#fff" />
+                              ) : (
+                                <p className="mb-0">NEXT</p>
+                              )}
+                            </button>
                           </div>
                         </form>
-                        
+
                       </div>
 
                     </div>
