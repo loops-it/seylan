@@ -66,17 +66,17 @@ const ShareImage = () => {
                                                 width={250}
                                                 height={250}
                                                 quality={100}
-                                                priority
+                                                priority 
                                             />
                                         )}
                                     </div>
                                 </div>
                             </div>
-                            {/* {imageURL && (
+                            {imageURL && (
                                 <Link href={imageURL} download className="d-flex justify-content-center align-items-center">
                                     <button className="submit-btn my-3 px-3" type="button">DOWNLOAD</button>
                                 </Link>
-                            )} */}
+                            )}
                         </div>
                     </div>
                 </div>

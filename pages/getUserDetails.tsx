@@ -349,15 +349,15 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                           >
                             <option value="">Profession</option>
                             <option value="Engineer">Engineer</option>
-                            <option value="teacher">teacher</option>
-                            <option value="nurse">nurse</option>
-                            <option value="gamer">gamer</option>
-                            <option value="architect">architect</option>
-                            <option value="accountant">accountant</option>
-                            <option value="musician">musician</option>
-                            <option value="dancer">dancer</option>
-                            <option value="actor">actor</option>
-                            <option value="military">military</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Nurse">Nurse</option>
+                            <option value="Gamer">Gamer</option>
+                            <option value="Architect">Architect</option>
+                            <option value="Accountant">Accountant</option>
+                            <option value="Musician">Musician</option>
+                            <option value="Dancer">Dancer</option>
+                            <option value="Actor">Actor</option>
+                            <option value="Military">Military</option>
                           </select>
 
                           {/* <input
