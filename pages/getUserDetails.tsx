@@ -3,7 +3,7 @@ import Layout from '@/components/layout';
 import LoadingDots from '@/components/ui/LoadingDots';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, NextPage } from 'next';
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import fs from 'fs/promises';
 import path from 'path';
 import { FiUpload } from 'react-icons/fi';
@@ -12,9 +12,33 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
 
+
+
+
+
+
 interface Props {
   dirs: string[];
 }
+
+
+
+
+
+
+const videoConstraints = {
+  width: 1280,
+  height: 720,
+  facingMode: "user"
+};
+
+// const WebcamCapture = () => {
+
+//   return (
+
+//   )
+// }
+
 
 const UserDetails: NextPage<Props> = ({ dirs }) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -40,12 +64,45 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   const [selectedCar, setSelectedCar] = useState(Number);
   const [selectedCarName, setSelectedCarName] = useState('');
   const videoConstraints = {
-    width:200,
-    facingMode:"environment"
+    width: 200,
+    facingMode: "environment"
   }
 
-  const webCamRef = useRef(null) 
-  const [url,seturl] = useState(null)
+  const webcamRef = useRef<Webcam>(null);
+
+  const [url, setUrl] = useState('')
+
+  const capturePhoto = () => {
+    console.log('capture btn clicked');
+    if (webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot();
+      console.log('imageSrc:', imageSrc);
+      setUrl(imageSrc || '');
+      // setSelectedImage(imageSrc || '')
+
+    } else {
+      console.log('webcam null error')
+    }
+  }
+  const base64ToBlob = (base64: string, type: string) => {
+    if (!base64.startsWith("data:image")) {
+      throw new Error("Invalid Base64 image format");
+    }
+
+    const byteString = atob(base64.split(",")[1]); // Decode Base64
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+
+    for (let i = 0; i < byteString.length; i++) {
+      uint8Array[i] = byteString.charCodeAt(i);
+    }
+
+    const blob = new Blob([uint8Array], { type });
+    return new File([blob], `${__filename}.jpg`, { type });
+
+  };
+
+
 
   const [spellError, setSpellError] = useState(false);
   // const [selectedImage, setSelectedImage] = useState<null | string>(null);
@@ -67,27 +124,27 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
 
 
-  const Camera = () => {
+  // const Camera = () => {
 
-   
-    
-    // const capturePhoto = React.useCallback (async()=>{
 
-    //   if(webCamRef.current){
-    //     const imageSrc  = webCamRef.current.getScreenshot();
-    //     seturl(imageSrc);
-    //   }else{
-    //     console.log('webcam null error')
-    //   }
 
-     
-    // },[webCamRef])
+  //   const capturePhoto = React.useCallback (async()=>{
 
-  }
+  //     if(webCamRef.current){
+  //       const imageSrc  = webCamRef.current.getScreenshot();
+  //       seturl(imageSrc);
+  //     }else{
+  //       console.log('webcam null error')
+  //     }
 
-  const onUserMedia = (e:any) => {
-    console.log(e)
-  }
+
+  //   },[webCamRef])
+
+  // }
+
+  // const onUserMedia = (e:any) => {
+  //   console.log(e)
+  // }
 
   // document.querySelectorAll('.vehicle').forEach((img) => {
   //   img.addEventListener('click', () => {
@@ -222,9 +279,32 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
           const phoneNumberWithoutSpaces = phoneNo.replace(/\s/g, '');
           console.log("tel : ", phoneNumberWithoutSpaces);
 
-          if (!selectedFile) return;
+          // if (!selectedFile) return;
+
           const formData = new FormData();
-          formData.append('savedImageUrl', selectedFile);
+
+          try {
+
+            if (url && url.startsWith("data:image")) {
+              const jpegFile = base64ToBlob(url, "image/jpeg");
+              console.log("JPEG File created:", jpegFile);
+              formData.append("savedImageUrl", jpegFile);
+
+
+              // const file = base64ToBlob(base64Image, );
+              // console.log(file); // File object
+
+
+            } else if (selectedFile) {
+              formData.append("savedImageUrl", selectedFile);
+            } else {
+              console.error("No valid image source found.");
+            }
+
+
+          } catch (error) {
+            console.error("Error creating Blob:", error);
+          }
           formData.append('name', name);
           formData.append('gender', gender);
           formData.append('profession', profession);
@@ -233,12 +313,15 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
           formData.append('phoneNo', phoneNumberWithoutSpaces);
           formData.append('vehicle_type', selectedCarName);
 
-          console.log('form data : ', formData);
+          // console.log('form data : ', formData);
+          formData.forEach((value, key) => {
+            console.log(`${key}: ${value}`);
+          });
           // data to backend
 
           if (validateEmail(email)) {
             console.log(
-              `data : ${name} ,${gender} ,${email} , ${phoneNumberWithoutSpaces}, ${ambition}, ${profession} , ${country}, ${selectedFile} `,
+              `data : ${name} ,${gender} ,${email} , ${phoneNumberWithoutSpaces}, ${profession} , ${selectedFile} `,
             );
 
             // https://dashboard.yourvibe.lk/api/save-customer-data
@@ -389,91 +472,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             <option value="Military">Military</option>
                           </select>
 
-                          {/* <input
-                            type="text"
-                            required
-                            placeholder="Email"
-                            className="mb-3 py-3 px-3 w-100 transparent-input"
-                            onChange={(e) => {
-                              setEmail(e.target.value);
-                              setEmailError('');
-                            }}
-                            onBlur={(e) => validateEmail(e.target.value)}
-                          /> */}
-                          {/* onBlur={(e) => validateEmail(e.target.value)} */}
-                          {/* {emailError && (
-                            <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">
-                              {emailError}
-                            </span>
-                          )} */}
-
-
-
-                          {/* {spellError && (
-                            <span className="spell-error-message error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">
-                              Please check your spelling.
-                            </span>
-                          )} */}
-                          {/* <select className="mb-3 py-3 px-3 w-100 transparent-input" required onChange={(e) => setAmbition(e.target.value)}>
-                                                        <option value="">Select Your Ambition</option>
-                                                        <option value="Doctor">Doctor</option>
-                                                        <option value="Engineer">Engineer</option>
-                                                        <option value="Teacher">Teacher</option>
-                                                        <option value="Lawyer">Lawyer</option>
-                                                        <option value="Nurse">Nurse</option>
-                                                        <option value="Accountant">Accountant</option>
-                                                        <option value="Architect">Architect</option>
-                                                        <option value="Scientist">Scientist</option>
-                                                        <option value="Programmer">Programmer</option>
-                                                        <option value="Chef">Chef</option>
-                                                        <option value="Artist">Artist</option>
-                                                        <option value="Musician">Musician</option>
-                                                        <option value="Writer">Writer</option>
-                                                        <option value="Designer">Designer</option>
-                                                        <option value="Police officer">Police officer</option>
-                                                        <option value="Firefighter">Firefighter</option>
-                                                        <option value="Pilot">Pilot</option>
-                                                        <option value="Psychologist">Psychologist</option>
-                                                        <option value="Social worker">Social worker</option>
-                                                        <option value="Veterinarian">Veterinarian</option>
-                                                        <option value="Dentist">Dentist</option>
-                                                        <option value="Pharmacist">Pharmacist</option>
-                                                        <option value="Journalist">Journalist</option>
-                                                        <option value="Economist">Economist</option>
-                                                        <option value="Entrepreneur">Entrepreneur</option>
-                                                        <option value="Financial advisor">Financial advisor</option>
-                                                        <option value="Marketing manager">Marketing manager</option>
-                                                        <option value="Consultant">Consultant</option>
-                                                        <option value="Electrician">Electrician</option>
-                                                        <option value="Plumber">Plumber</option>
-                                                        <option value="Carpenter">Carpenter</option>
-                                                        <option value="Mechanic">Mechanic</option>
-                                                        <option value="Farmer">Farmer</option>
-                                                        <option value="Librarian">Librarian</option>
-                                                        <option value="Athlete">Athlete</option>
-                                                        <option value="Photographer">Photographer</option>
-                                                        <option value="Filmmaker">Filmmaker</option>
-                                                        <option value="Fashion designer">Fashion designer</option>
-                                                        <option value="Researcher">Researcher</option>
-                                                    </select> */}
-
-                          {/* <label htmlFor="upload-input" className="hidden-file-input d-flex justify-content-center">
-                                                        <input
-                                                            type="file"
-                                                            id="upload-input"
-                                                            onChange={handleFileChange}
-                                                            required
-                                                        />
-                                                        <div className="d-flex rounded justify-content-center align-items-center curser-pointer" style={{ width: '200px' }}>
-                                                            {
-                                                                selectedImage ? (
-                                                                    <img src={selectedImage} alt="" />
-                                                                ) : (
-                                                                    <span className='text-white mb-2 py-3 px-3 w-100 transparent-input'>Select Image <FiUpload style={{ width: '25px' }} /></span>
-                                                                )
-                                                            }
-                                                        </div>
-                                                    </label> */}
+                          
                           <div className="d-flex flex-column-reverse flex-lg-row">
                             <div className="col-12 ">
                               <label
@@ -482,18 +481,22 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 onDragOver={handleDragOver}
                                 onDrop={handleDrop}
                               >
-                                {/* <Webcam
-                                  ref = {Webcamref}
-                                  audio = {false}
-                                  screenshotFormat='image/png'
-                                  videoConstraints = {videoConstraints}
-                                  onUserMedia={onUserMedia}
-                                  mirrored = {true}
+                                <div>
+                                  <Webcam
+                                    style={{ borderRadius: '10px', width: '20vw', height: '20vh' }}
+                                    audio={false}
+                                    ref={webcamRef}
+                                    height={720}
+                                    screenshotFormat="image/jpeg"
+                                    width={1280}
+                                    videoConstraints={videoConstraints}
+                                  />
 
-                                />
+                                  <button className='btn btn-black border bg-white rounded-pill ' onClick={capturePhoto}>Capture</button>
 
-                                <button onClick={capturePhoto}>capture</button> */}
-                                    
+
+                                </div>
+
                                 <input
                                   type="file"
                                   id="upload-input"
@@ -506,9 +509,17 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                     style={{ maxHeight: '100px', width: 'auto' }}
 
                                   >
-                                    {selectedImage ? (
+
+
+                                    {url ? (
+
+                                      <img src={url} alt="" style={{ maxHeight: '100px', width: 'auto' }} />
+
+                                    ) : selectedImage ? (
+
                                       <img src={selectedImage} alt="" style={{ maxHeight: '100px', width: 'auto' }} />
                                     ) : (
+
                                       <span
                                         className="text-white mb-2 py-3 px-3 w-100  d-flex flex-column justify-content-center align-items-center"
                                         style={{ height: '200px !important' }}
@@ -550,7 +561,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
 
 
-                          <div className='vehicle-row'>
+                          {/* <div className='vehicle-row'>
                             <h6 className='text-white my-4'>Select Your Dream Vehicle Type</h6>
                             <div className="column">
                               <img
@@ -560,7 +571,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 className={`vehicle ${selectedCar === 1 ? 'selected' : ''}`}
                                 id='1'
                               />
-                              <div className='car-name-text' style={{bottom:'170px',left:'126px'}}>
+                              <div className='car-name-text' style={{ bottom: '170px', left: '126px' }}>
                                 <p>Benz</p>
                               </div>
                               <img
@@ -570,7 +581,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 className={`vehicle ${selectedCar === 2 ? 'selected' : ''}`}
                                 id='2'
                               />
-                              <div className='car-name-text' style={{bottom:'170px',left:'234px'}}>
+                              <div className='car-name-text' style={{ bottom: '170px', left: '234px' }}>
                                 <p>BMW</p>
                               </div>
                               <img
@@ -580,7 +591,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 className={`vehicle ${selectedCar === 3 ? 'selected' : ''}`}
                                 id='3'
                               />
-                              <div className='car-name-text' style={{bottom:'170px',left:'340px'}}>
+                              <div className='car-name-text' style={{ bottom: '170px', left: '340px' }}>
                                 <p>Ferrari</p>
                               </div>
                               <img
@@ -590,7 +601,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 className={`vehicle ${selectedCar === 4 ? 'selected' : ''}`}
                                 id='4'
                               />
-                              <div className='car-name-text' style={{bottom:'170px',left:'452px'}}>
+                              <div className='car-name-text' style={{ bottom: '170px', left: '452px' }}>
                                 <p>Lamborghini</p>
                               </div>
                               <img
@@ -600,14 +611,90 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 className={`vehicle ${selectedCar === 5 ? 'selected' : ''}`}
                                 id='5'
                               />
-                              <div className='car-name-text' style={{bottom:'170px',left:'560px'}}>
+                              <div className='car-name-text' style={{ bottom: '170px', left: '560px' }}>
                                 <p>Porsche</p>
                               </div>
-                           
-                            </div>
-                           
 
+                            </div>
+
+
+                          </div> */}
+
+                          <div className="vehicle-row">
+                            <h6 className="text-white my-4">Select Your Dream Vehicle Type</h6>
+                            <div className="vehicle-column">
+                              {/* Benz */}
+                              <div className="vehicle-container">
+                                <img
+                                  onClick={() => handleSelectedCarImage('/seylan/vehicle_types/Benz.png', 1, 'Benz')}
+                                  src="/seylan/vehicle_types/Benz.png"
+                                  alt="Benz"
+                                  className={`vehicle ${selectedCar === 1 ? 'selected' : ''}`}
+                                  id="1"
+                                />
+                                <div className="car-name-text">
+                                  <p>Benz</p>
+                                </div>
+                              </div>
+
+                              {/* BMW */}
+                              <div className="vehicle-container">
+                                <img
+                                  onClick={() => handleSelectedCarImage('/seylan/vehicle_types/BMW.png', 2, 'BMW')}
+                                  src="/seylan/vehicle_types/BMW.png"
+                                  alt="BMW"
+                                  className={`vehicle ${selectedCar === 2 ? 'selected' : ''}`}
+                                  id="2"
+                                />
+                                <div className="car-name-text">
+                                  <p>BMW</p>
+                                </div>
+                              </div>
+
+                              {/* Ferrari */}
+                              <div className="vehicle-container">
+                                <img
+                                  onClick={() => handleSelectedCarImage('/seylan/vehicle_types/Ferrari.png', 3, 'Ferrari')}
+                                  src="/seylan/vehicle_types/ferrari.png"
+                                  alt="Ferrari"
+                                  className={`vehicle ${selectedCar === 3 ? 'selected' : ''}`}
+                                  id="3"
+                                />
+                                <div className="car-name-text">
+                                  <p>Ferrari</p>
+                                </div>
+                              </div>
+
+                              {/* Lamborghini */}
+                              <div className="vehicle-container">
+                                <img
+                                  onClick={() => handleSelectedCarImage('/seylan/vehicle_types/Lambogini.png', 4, 'Lamborghini')}
+                                  src="/seylan/vehicle_types/Lambogini.png"
+                                  alt="Lamborghini"
+                                  className={`vehicle ${selectedCar === 4 ? 'selected' : ''}`}
+                                  id="4"
+                                />
+                                <div className="car-name-text">
+                                  <p>Lamborghini</p>
+                                </div>
+                              </div>
+
+                              {/* Porsche */}
+                              <div className="vehicle-container">
+                                <img
+                                  onClick={() => handleSelectedCarImage('/seylan/vehicle_types/porche.png', 5, 'Porsche')}
+                                  src="/seylan/vehicle_types/porche.png"
+                                  alt="Porsche"
+                                  className={`vehicle ${selectedCar === 5 ? 'selected' : ''}`}
+                                  id="5"
+                                />
+                                <div className="car-name-text">
+                                  <p>Porsche</p>
+                                </div>
+                              </div>
+                            </div>
                           </div>
+
 
                           <label className="d-flex flex-row text-white text-start px-3 mt-2">
                             <input

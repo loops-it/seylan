@@ -113,6 +113,7 @@ button {
   
   background-position: top left;
   background-size: cover;
+  
   background-repeat: no-repeat;
   padding-top: 0px !important;
   padding-bottom: 0px !important;
@@ -271,6 +272,8 @@ button {
   color: #fff;
 }
 
+
+
 #blur_background {
   position: absolute;
   top: 0;
@@ -298,7 +301,44 @@ button {
   max-height: 200px;
 
 }
+/* ---------------------- */
+.vehicle-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.vehicle-column {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Ensures responsiveness for multiple items */
+  gap: 20px; /* Adds space between items */
+}
+
+.vehicle-container {
+  position: relative;
+  display: inline-block;
+  width: 150px; /* Adjust to fit your layout */
+}
+
+.vehicle {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.car-name-text {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  /* background: rgba(0, 0, 0, 0.6); */
+  color: white;
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+/* ---------------------- */
 .vehicle-box{
   /* border: 2px solid white;
   border-radius: 8px; */
@@ -306,13 +346,13 @@ button {
   width: 20%;
   align-self: flex-start;
 }
-.vehicle {
+/* .vehicle {
   height: 100px;
   width: 100px;
   margin: 5px;
   cursor: pointer;
   transition: border 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
+} */
 
 .vehicle.selected {
   border: 3px solid #c55f5f !important;
@@ -677,6 +717,11 @@ button {
     padding-top: 100px !important;
   }
 
+  .user-form{
+    padding-inline: 0;
+    
+  }
+
   .background {
     background-position: top left;
     padding-top: 100px !important;
@@ -696,7 +741,7 @@ button {
   }
 
   .home-txt-container {
-    width: 75%;
+    width: 75vh;
   }
 
   .nav-link {
@@ -728,6 +773,10 @@ button {
     width: 100%;
   }
 
+  .user-form{
+    padding-inline: 0;
+    
+  }
   .select-box {
     background-color: #0f012d;
     width: 150px;

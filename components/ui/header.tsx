@@ -12,7 +12,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand-lg">
 
           <div className="container-fluid" >
-            <Link className="navbar-brand m-0 p-0" href="#">
+            <Link className="navbar-brand m-0 p-0" href="/">
               <Image src="/seylan/seylan_logo.png" alt="logo"  className='header-logo-1' width={202} height={114} />
             </Link>
             <button className="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
