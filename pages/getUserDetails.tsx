@@ -472,30 +472,34 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             <option value="Military">Military</option>
                           </select>
 
-                          
+
                           <div className="d-flex flex-column-reverse flex-lg-row">
-                            <div className="col-12 ">
+                            <div className="col-md-6 d-flex justify-content-center">
+                              <div>
+                                <Webcam
+                                className='webcam-input'
+                                  style={{ borderRadius: '30px', width: '20vw', height: '30vh', }}
+                                  audio={false}
+                                  ref={webcamRef}
+                                  height={720}
+                                  screenshotFormat="image/jpeg"
+                                  width={1280}
+                                  videoConstraints={videoConstraints}
+                                />
+
+                                <button className='submit-btn' onClick={capturePhoto}>Capture</button>
+
+
+                              </div>
+                            </div>
+                            <div className="col-md-6">
                               <label
                                 htmlFor="upload-input"
-                                className="hidden-file-input d-flex justify-content-center"
+                                className="hidden-file-input d-flex justify-content-center h-100"
                                 onDragOver={handleDragOver}
                                 onDrop={handleDrop}
                               >
-                                <div>
-                                  <Webcam
-                                    style={{ borderRadius: '10px', width: '20vw', height: '20vh' }}
-                                    audio={false}
-                                    ref={webcamRef}
-                                    height={720}
-                                    screenshotFormat="image/jpeg"
-                                    width={1280}
-                                    videoConstraints={videoConstraints}
-                                  />
 
-                                  <button className='btn btn-black border bg-white rounded-pill ' onClick={capturePhoto}>Capture</button>
-
-
-                                </div>
 
                                 <input
                                   type="file"

@@ -20,7 +20,9 @@ const Success = () => {
                 <div className="home_slider_container p-0 m-0 position-relative">
                     <div>
                         <div className="home_slider_image_container min-height d-flex flex-column justify-content-center align-items-center image1 p-2 pt-lg-5 m-0 ">
+                            
                             <div className="d-flex flex-column justify-content-center align-items-center text-center transparent-select-box" >
+                            <div className='blur_background h-100'></div>
                                 <h2 className="text-white font-36 mt-5">Thank you</h2>
                                 <p className="text-white font-20 mb-3" style={{fontSize: "22px !important", fontWeight:"600 !important"}}>
                                 Your Image is now being generated and you will receive it shortly via email and Whatsapp
@@ -37,21 +39,23 @@ const Success = () => {
                                     height={107}
                                 ></Image>
 
-                                <Link href="/" className='d-flex justify-content-center align-items-center'>
+                                {/* <Link href="/" className='d-flex justify-content-center align-items-center'> */}
                                     {/* <button className="submit-btn-success my-3 px-3" type="submit">
                                    Next {ambition}
                                     </button> */}
 
                             
-                                </Link>
+                                {/* </Link> */}
 
                                 {/* <p className="text-white font-18 mb-3">
                                     Do you like to see your path to becoming a {ambition}?
                                 </p> */}
                             </div>
-                            <button className="submit-btn text-center d-flex justify-content-center align-items-center mt-5 px-3" type="submit">
-                              <p className="mb-0">NEXT</p>
+                            <Link href="/" className='text-center d-flex justify-content-center align-items-center mt-5 px-3'>
+                            <button className="submit-btn " type="submit">
+                              <p className="mb-0">FINISH</p>
                             </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

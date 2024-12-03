@@ -275,16 +275,45 @@ button {
 
 
 #blur_background {
-  position: absolute;
-  top: 0;
+  /* position: absolute;
+  /* top: 0; */
   right: 0;
   bottom: 0;
   left: 0;
   filter: blur(8px) !important;
   -webkit-filter: blur(8px) !important;
   z-index: -1;
-}
 
+ /* From https://css.glass */
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: -1;
+  position: absolute;
+  }
+
+
+  .blur_background {
+    /* position: absolute;
+    /* top: 0; */
+    right: 0;
+    bottom: 0;
+    left: 0;
+    filter: blur(8px) !important;
+    -webkit-filter: blur(8px) !important;
+    z-index: -1;
+  
+   /* From https://css.glass */
+    background: rgba(0, 0, 0, 0.28);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: -1;
+    position: absolute;
+    }
 .transparent-input {
   background-color: #878787c7;
   border-radius: 50px;
@@ -318,7 +347,7 @@ button {
 .vehicle-container {
   position: relative;
   display: inline-block;
-  width: 150px; /* Adjust to fit your layout */
+  width: 180px; /* Adjust to fit your layout */
 }
 
 .vehicle {
@@ -736,6 +765,11 @@ button {
     height: 40vh;
   }
 
+  .home-text{
+    font-size: 40px !important;
+   
+  }
+
   .navbar {
     height: auto;
   }
@@ -803,6 +837,17 @@ button {
   .background_home {
     padding-top: 0px !important;
   }
+
+  .home-txt-container h2{
+    margin-top: 0 !important;
+  }
+
+  .webcam-input{
+    border-radius: 30px;
+    width: 100% !important;
+    height: auto;
+    margin-top: 36px;
+  }
 }
 
 .home_slider_container {
@@ -866,4 +911,14 @@ button {
 .tooltip:hover::after {
   opacity: 1;
   visibility: visible;
+}
+
+
+@media screen and (min-width: 976px) {
+  .mobile-nav{
+    display: none !important;
+   
+  }
+
+  
 }
