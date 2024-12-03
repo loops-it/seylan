@@ -478,7 +478,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               <div>
                                 <Webcam
                                 className='webcam-input'
-                                  style={{ borderRadius: '30px', width: '20vw', height: '30vh', }}
+                                  style={{ borderRadius: '30px', width: '20vw', height: 'auto', }}
                                   audio={false}
                                   ref={webcamRef}
                                   height={720}
@@ -528,8 +528,8 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                         className="text-white mb-2 py-3 px-3 w-100  d-flex flex-column justify-content-center align-items-center"
                                         style={{ height: '200px !important' }}
                                       >
-                                        <h5>Drop or Select Image</h5>{' '}
-                                        <p style={{ width: "300px !important" }}>(Upload a clear image of you where your features are clearly shown)</p>{' '}
+                                        <h5 className='drop-image-text1'>Drop or Select Image</h5>{' '}
+                                        <p className='drop-image-text2' style={{ width: "300px !important",maxWidth:"240px" }}>(Upload a clear image of you where your features are clearly shown)</p>{' '}
                                         <FiUpload style={{ width: '35px' }} />
                                       </span>
                                     )}

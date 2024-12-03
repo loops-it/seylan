@@ -211,6 +211,15 @@ button {
   height: max-content;
 }
 
+.drop-image-text1{
+  font-size: 18px;
+}
+
+.drop-image-text2{
+  font-size: 12px;
+  
+}
+
 .icon-share {
   font-size: 25px !important;
 }
