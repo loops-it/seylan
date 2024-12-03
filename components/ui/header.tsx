@@ -30,8 +30,8 @@ const Navbar = () => {
         </nav>
       </div>
       <div className="col-12 col-lg-2 d-none d-lg-flex justify-content-center align-items-center">
-      <Link className="nav-link me-3" aria-current="page" href="#">Home</Link>
-      <Link className="nav-link me-5 curser-pointer" href="#">Gallery</Link>      
+      <Link className="nav-link me-3" aria-current="page" href="/">Home</Link>
+      <Link className="nav-link me-5 curser-pointer" href="/gallery">Gallery</Link>      
       </div>
     </div>
   </section>

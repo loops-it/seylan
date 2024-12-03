@@ -3,10 +3,11 @@ import Layout from '@/components/layout';
 import LoadingDots from '@/components/ui/LoadingDots';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import fs from 'fs/promises';
 import path from 'path';
 import { FiUpload } from 'react-icons/fi';
+import Webcam from "react-webcam";
 import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
@@ -38,7 +39,13 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   const [selectedCarImage, setSelectedCarImage] = useState('');
   const [selectedCar, setSelectedCar] = useState(Number);
   const [selectedCarName, setSelectedCarName] = useState('');
+  const videoConstraints = {
+    width:200,
+    facingMode:"environment"
+  }
 
+  const webCamRef = useRef(null) 
+  const [url,seturl] = useState(null)
 
   const [spellError, setSpellError] = useState(false);
   // const [selectedImage, setSelectedImage] = useState<null | string>(null);
@@ -59,6 +66,28 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   });
 
 
+
+  const Camera = () => {
+
+   
+    
+    // const capturePhoto = React.useCallback (async()=>{
+
+    //   if(webCamRef.current){
+    //     const imageSrc  = webCamRef.current.getScreenshot();
+    //     seturl(imageSrc);
+    //   }else{
+    //     console.log('webcam null error')
+    //   }
+
+     
+    // },[webCamRef])
+
+  }
+
+  const onUserMedia = (e:any) => {
+    console.log(e)
+  }
 
   // document.querySelectorAll('.vehicle').forEach((img) => {
   //   img.addEventListener('click', () => {
@@ -298,13 +327,13 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             type="text"
                             required
                             placeholder="Name"
-                            className="mb-2 py-3 px-3 w-100 transparent-input"
+                            className="mb-3 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => setName(e.target.value)}
                           />
 
                           <select
                             name="gender"
-                            className="mb-2 py-3 px-3 w-100 transparent-input"
+                            className="mb-3 py-3 px-3 w-100 transparent-input"
                             required
                             value={gender}
                             onChange={(e) => setGender(e.currentTarget.value)}
@@ -319,7 +348,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             type="email"
                             required
                             placeholder="Email"
-                            className="mb-2 py-3 px-3 w-100 transparent-input"
+                            className="mb-3 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => setEmail(e.target.value)}
                           />
 
@@ -327,7 +356,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             type="text"
                             required
                             placeholder="Your Whatsapp Number"
-                            className="mb-2 py-3 px-3 w-100 transparent-input"
+                            className="mb-3 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => {
                               setPhoneNo(e.target.value);
                               setPhoneError('');
@@ -341,7 +370,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             </span>
                           )}
                           <select
-                            className="mb-2 py-3 px-3 w-100 transparent-input"
+                            className="mb-3 py-3 px-3 w-100 transparent-input"
                             required
                             name="proffession"
                             value={profession}
@@ -364,7 +393,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             type="text"
                             required
                             placeholder="Email"
-                            className="mb-2 py-3 px-3 w-100 transparent-input"
+                            className="mb-3 py-3 px-3 w-100 transparent-input"
                             onChange={(e) => {
                               setEmail(e.target.value);
                               setEmailError('');
@@ -385,7 +414,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               Please check your spelling.
                             </span>
                           )} */}
-                          {/* <select className="mb-2 py-3 px-3 w-100 transparent-input" required onChange={(e) => setAmbition(e.target.value)}>
+                          {/* <select className="mb-3 py-3 px-3 w-100 transparent-input" required onChange={(e) => setAmbition(e.target.value)}>
                                                         <option value="">Select Your Ambition</option>
                                                         <option value="Doctor">Doctor</option>
                                                         <option value="Engineer">Engineer</option>
@@ -453,6 +482,18 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 onDragOver={handleDragOver}
                                 onDrop={handleDrop}
                               >
+                                {/* <Webcam
+                                  ref = {Webcamref}
+                                  audio = {false}
+                                  screenshotFormat='image/png'
+                                  videoConstraints = {videoConstraints}
+                                  onUserMedia={onUserMedia}
+                                  mirrored = {true}
+
+                                />
+
+                                <button onClick={capturePhoto}>capture</button> */}
+                                    
                                 <input
                                   type="file"
                                   id="upload-input"
@@ -519,6 +560,9 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 className={`vehicle ${selectedCar === 1 ? 'selected' : ''}`}
                                 id='1'
                               />
+                              <div className='car-name-text' style={{bottom:'170px',left:'126px'}}>
+                                <p>Benz</p>
+                              </div>
                               <img
                                 onClick={() => handleSelectedCarImage('/seylan/vehicle_types/BMW.png', 2, 'BMW')}
                                 src="/seylan/vehicle_types/BMW.png"
@@ -526,6 +570,9 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 className={`vehicle ${selectedCar === 2 ? 'selected' : ''}`}
                                 id='2'
                               />
+                              <div className='car-name-text' style={{bottom:'170px',left:'234px'}}>
+                                <p>BMW</p>
+                              </div>
                               <img
                                 onClick={() => handleSelectedCarImage('/seylan/vehicle_types/Ferrari.png', 3, 'Ferrari')}
                                 src="/seylan/vehicle_types/ferrari.png"
@@ -533,6 +580,9 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 className={`vehicle ${selectedCar === 3 ? 'selected' : ''}`}
                                 id='3'
                               />
+                              <div className='car-name-text' style={{bottom:'170px',left:'340px'}}>
+                                <p>Ferrari</p>
+                              </div>
                               <img
                                 onClick={() => handleSelectedCarImage('/seylan/vehicle_types/Lambogini.png', 4, 'Lamborghini')}
                                 src="/seylan/vehicle_types/Lambogini.png"
@@ -540,6 +590,9 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 className={`vehicle ${selectedCar === 4 ? 'selected' : ''}`}
                                 id='4'
                               />
+                              <div className='car-name-text' style={{bottom:'170px',left:'452px'}}>
+                                <p>Lamborghini</p>
+                              </div>
                               <img
                                 onClick={() => handleSelectedCarImage('/seylan/vehicle_types/porche.png', 5, 'Porsche')}
                                 src="/seylan/vehicle_types/porche.png"
@@ -547,7 +600,12 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                 className={`vehicle ${selectedCar === 5 ? 'selected' : ''}`}
                                 id='5'
                               />
+                              <div className='car-name-text' style={{bottom:'170px',left:'560px'}}>
+                                <p>Porsche</p>
+                              </div>
+                           
                             </div>
+                           
 
                           </div>
 
@@ -559,7 +617,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               onChange={handleCheckboxChange}
                               required
                             />
-                            <p> I hereby agree to the terms and conditions</p>
+                            <p className='termsAndConditions'> I hereby agree to the terms and conditions</p>
                           </label>
                           {phoneNoAttempt && (
                             <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">

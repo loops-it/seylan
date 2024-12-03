@@ -110,13 +110,15 @@ button {
 }
 .background_home {
   background-image: url("/seylan/bg-home.png");
+  
   background-position: top left;
   background-size: cover;
   background-repeat: no-repeat;
   padding-top: 0px !important;
   padding-bottom: 0px !important;
   width: 100vw;
-
+  /* background-color: #000;*/
+  opacity: 100%; 
 }
 
 .background_user_details {
@@ -260,6 +262,15 @@ button {
   font-size: 25px;
 }
 
+.car-name-text{
+  position: absolute;
+  padding-left: 10px;
+  /* bottom: 0;
+  left: 0; */
+  width: 35%;
+  color: #fff;
+}
+
 #blur_background {
   position: absolute;
   top: 0;
@@ -272,7 +283,7 @@ button {
 }
 
 .transparent-input {
-  background-color: #ffffff3b;
+  background-color: #878787c7;
   border-radius: 50px;
   line-height: 18px;
   font-size: 16px;
@@ -282,8 +293,8 @@ button {
 }
 
 .transparent-img-input{
-  background-color: #068D87;
-  opacity: 40%;
+  background-color: #068d876b;
+  /* opacity: 40%; */
   max-height: 200px;
 
 }
@@ -309,11 +320,11 @@ button {
 }
 
 .user-form{
-  padding-inline: 50px;
+  padding-inline: 150px;
   
 }
 .transparent-img-input{
-  background-color: #068D87 !important; 
+  background-color: #068d876b !important; 
 }
 .hidden-file-input {
   position: relative;
@@ -332,6 +343,7 @@ button {
 .checkbox-style {
   width: 22px;
   height: 22px;
+
 }
 
 option {
@@ -349,7 +361,7 @@ option {
   /* box-shadow: inset; */
   text-transform: uppercase;
   color: white;
-  background-color: #ed3434;
+  background-color: #FF0000;
   border: solid 1px #fff;
   font-family: var(--font-family-Regular);
   font-size: 22px;
@@ -366,8 +378,8 @@ option {
   border-radius: 8px;
   text-transform: none !important;
   color: white;
-  background-color: #ed3434;
-  border: solid 1px #fff;
+  background-color: #FF0000;
+  border: solid 2px #fff;
   font-family: var(--font-family-Regular);
   font-size: 22px;
   line-height: 22px;
@@ -393,6 +405,10 @@ option {
   color: #fff;
   background-color: #ca1f1f;
   border: solid 1px #fff;
+}
+
+.termsAndConditions{
+  font-weight: 800;
 }
 
 .pages-height {
@@ -500,7 +516,7 @@ option {
 }
 
 .header-logo-1 {
-  width: 100px !important;
+  width: 135px !important;
   height: auto !important;
 }
 
@@ -744,7 +760,7 @@ button {
   width: 100vw;
 }
 .home-text{
-  font-size: 90px;
+  font-size: 78px;
   color: #fff;
   font-family: oswald;
 }
