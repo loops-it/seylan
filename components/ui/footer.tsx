@@ -11,14 +11,12 @@ export default function Footer() {
           style={{ height: "100%" }}>
           <div className="d-flex flex-row text-center icon_wrapper py-3 py-lg-1">
             <Link href={"https://www.facebook.com/SeylanBank"}>
-              <Image width={30} height={30} src="/fb.png" className="mx-2 border-radious-50 footer-icons" alt="" />
-              
-
+              <Image width={30} height={30} src="/seylan/logo/fb.png" className="mx-2 border-radious-50 footer-icons" alt="" />
             </Link>
-            <Link href={"https://www.instagram.com/seylanbanklk/"}><Image width={30} height={30} src="/insta.png" className="mx-2 border-radious-50 footer-icons" alt="" /></Link>
-            <Link href={"#"}><Image width={30} height={30} src="/yt.png" className="mx-2 border-radious-50 footer-icons" alt="" /></Link>
-            <Link href={"https://www.tiktok.com/@seylanbank"}><Image width={30} height={30} src="/tiktok_logo.png" className="mx-2 border-radious-50 footer-icons" alt="" /></Link>
-            <Link href={"https://www.tiktok.com/@seylanbank"}><Image width={30} height={30} src="/linkedin_icon.png" className="mx-2 border-radious-50 footer-icons" alt="" /></Link>
+            <Link href={"https://www.instagram.com/seylanbanklk/"}><Image width={30} height={30} src="/seylan/logo/instagramm.png" className="mx-2 border-radious-50 footer-icons" alt="" /></Link>
+            <Link href={"https://www.youtube.com/@seylanmedia"}><Image width={30} height={30} src="/seylan/logo/Youtube.png" className="mx-2 border-radious-50 footer-icons" alt="" /></Link>
+            <Link href={"https://www.tiktok.com/@seylanbank"}><Image width={30} height={30} src="/seylan/logo/tiktok.png" className="mx-2 border-radious-50 footer-icons" alt="" /></Link>
+            <Link href={"https://www.linkedin.com/company/seylanbankplc"}><Image width={30} height={30} src="/seylan/logo/linkedin.png" className="mx-2 border-radious-50 footer-icons" alt="" /></Link>
 
           </div>
           {/* <div className="d-flex text-white flex-row text-center icon_wrapper py-3 pb-lg-1">
