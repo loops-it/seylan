@@ -220,6 +220,12 @@ button {
   
 }
 
+.swiper-page-wrapper{
+  min-height: 100vh;
+  display: flex;
+  align-items: center !important;
+}
+
 .icon-share {
   font-size: 25px !important;
 }
@@ -808,6 +814,10 @@ button {
     padding-top: 50px !important;
   }
 
+  .user-form{
+    padding: 10px;
+  }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -847,6 +857,10 @@ button {
     padding-top: 0px !important;
   }
 
+  .footer_background{
+    min-height: 100vh;
+  }
+
   .home-txt-container h2{
     margin-top: 0 !important;
   }
@@ -856,6 +870,10 @@ button {
     width: 100% !important;
     height: auto;
     margin-top: 36px;
+  }
+
+  .user-form{
+    padding: 10px;
   }
 }
 
@@ -928,6 +946,8 @@ button {
     display: none !important;
    
   }
+
+  
 
   
 }

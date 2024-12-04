@@ -63,6 +63,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   const [selectedCarImage, setSelectedCarImage] = useState('');
   const [selectedCar, setSelectedCar] = useState(Number);
   const [selectedCarName, setSelectedCarName] = useState('');
+  const [otherProfession,setOtherProfession] = useState('')
   const videoConstraints = {
     width: 200,
     facingMode: "environment"
@@ -265,8 +266,11 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
     }
   };
 
+
+  console.log(otherProfession);
   // handle function
   const handleSubmit = async (event: { preventDefault: () => void }) => {
+    
     event.preventDefault();
     setIsLoading(true);
     console.log('file Added');
@@ -307,7 +311,13 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
           }
           formData.append('name', name);
           formData.append('gender', gender);
-          formData.append('profession', profession);
+          console.log('profession',profession);
+          if(profession == 'Other'){
+            formData.append('profession', otherProfession);
+          }else{
+            formData.append('profession', profession);
+          }
+          
           // formData.append('ambition', ambition);
           formData.append('email', email);
           formData.append('phoneNo', phoneNumberWithoutSpaces);
@@ -316,6 +326,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
           // console.log('form data : ', formData);
           formData.forEach((value, key) => {
             console.log(`${key}: ${value}`);
+
           });
           // data to backend
 
@@ -455,11 +466,13 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                           <select
                             className="mb-3 py-3 px-3 w-100 transparent-input"
                             required
-                            name="proffession"
+                            name="profession"
                             value={profession}
                             onChange={(e) => setProfession(e.currentTarget.value)}
+                            
                           >
                             <option value="">Profession</option>
+                            <option value="Doctor">Doctor</option>
                             <option value="Engineer">Engineer</option>
                             <option value="Teacher">Teacher</option>
                             <option value="Nurse">Nurse</option>
@@ -470,78 +483,107 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             <option value="Dancer">Dancer</option>
                             <option value="Actor">Actor</option>
                             <option value="Military">Military</option>
+                            <option value="Other">Other</option>
                           </select>
 
+                          {profession === 'Other' && (
+                            <input
+                              className="mb-3 py-3 px-3 w-100 transparent-input"
+                              id="otherProfessionInput"
+                              type="text"
+                              placeholder="Enter Your Profession"
+                              name="otherProfession"
+                              onChange={(e) => 
+                                setOtherProfession(e.currentTarget.value)
+                              }
 
-                          <div className="d-flex flex-column-reverse flex-lg-row">
-                            <div className="col-md-6 d-flex justify-content-center">
-                              <div>
-                                <Webcam
+                            />
+                              
+                          )}
+                          
+
+                          {/* <div className="col-12 col-lg-12">
+                            {selectedCategory && selectedCategory.value === 'other' && (
+                              <input
+                                className="form-control mb-3"
+                                id="serviceCategory"
+                                type="text"
+                                placeholder="Entery Category of your Serivce/business"
+                                name="serviceCategory"
+                                onChange={e => setNewCategory(e.target.value)}
+                              />
+                            )}
+                          </div> */}
+
+                          {/* <div className="d-flex flex-column-reverse flex-lg-row">*/}
+                          <div className="col-md-9 d-flex justify-content-center">
+                            <div>
+                              <Webcam
                                 className='webcam-input'
-                                  style={{ borderRadius: '30px', width: '20vw', height: 'auto', }}
-                                  audio={false}
-                                  ref={webcamRef}
-                                  height={720}
-                                  screenshotFormat="image/jpeg"
-                                  width={1280}
-                                  videoConstraints={videoConstraints}
-                                />
+                                style={{ borderRadius: '30px', width: '30vw', height: 'auto', }}
+                                audio={false}
+                                ref={webcamRef}
+                                height={720}
+                                screenshotFormat="image/jpeg"
+                                width={1280}
+                                videoConstraints={videoConstraints}
+                              />
 
-                                <button className='submit-btn' onClick={capturePhoto}>Capture</button>
+                              <button className='submit-btn my-3' onClick={capturePhoto}>Capture</button>
 
 
-                              </div>
                             </div>
-                            <div className="col-md-6">
-                              <label
-                                htmlFor="upload-input"
-                                className="hidden-file-input d-flex justify-content-center h-100"
-                                onDragOver={handleDragOver}
-                                onDrop={handleDrop}
-                              >
+                          </div>
+                          <div className="col-md-9">
+                            <label
+                              htmlFor="upload-input"
+                              className="hidden-file-input d-flex justify-content-center h-100"
+                              onDragOver={handleDragOver}
+                              onDrop={handleDrop}
+                            >
 
 
-                                <input
-                                  type="file"
-                                  id="upload-input"
-                                  onChange={handleFileChange}
-                                  style={{ maxHeight: '100px', width: 'auto' }}
-                                />
-                                <div className="d-flex transparent-input transparent-img-input flex-column justify-content-center align-items-center py-3">
-                                  <div
-                                    className="d-flex flex-column rounded justify-content-center align-items-center cursor-pointer"
-                                    style={{ maxHeight: '100px', width: 'auto' }}
+                              <input
+                                type="file"
+                                id="upload-input"
+                                onChange={handleFileChange}
+                                style={{ maxHeight: '150px', width: 'auto' }}
+                              />
+                              <div className="d-flex transparent-input transparent-img-input flex-column justify-content-center align-items-center py-3">
+                                <div
+                                  className="d-flex flex-column rounded justify-content-center align-items-center cursor-pointer"
+                                  style={{ maxHeight: '200px', width: 'auto' }}
 
-                                  >
+                                >
 
 
-                                    {url ? (
+                                  {url ? (
 
-                                      <img src={url} alt="" style={{ maxHeight: '100px', width: 'auto' }} />
+                                    <img src={url} alt="" style={{ maxHeight: '150px', width: 'auto' }} />
 
-                                    ) : selectedImage ? (
+                                  ) : selectedImage ? (
 
-                                      <img src={selectedImage} alt="" style={{ maxHeight: '100px', width: 'auto' }} />
-                                    ) : (
+                                    <img src={selectedImage} alt="" style={{ maxHeight: '150px', width: 'auto' }} />
+                                  ) : (
 
-                                      <span
-                                        className="text-white mb-2 py-3 px-3 w-100  d-flex flex-column justify-content-center align-items-center"
-                                        style={{ height: '200px !important' }}
-                                      >
-                                        <h5 className='drop-image-text1'>Drop or Select Image</h5>{' '}
-                                        <p className='drop-image-text2' style={{ width: "300px !important",maxWidth:"240px" }}>(Upload a clear image of you where your features are clearly shown)</p>{' '}
-                                        <FiUpload style={{ width: '35px' }} />
-                                      </span>
-                                    )}
-                                  </div>
+                                    <span
+                                      className="text-white mb-2 py-3 px-3 w-100  d-flex flex-column justify-content-center align-items-center"
+                                      style={{ height: '200px !important' }}
+                                    >
+                                      <h5 className='drop-image-text1'>Drop or Capture a Image</h5>{' '}
+                                      <p className='drop-image-text2' style={{ width: "300px !important", maxWidth: "240px" }}>(Capture a clear image of you where your features are clearly shown)</p>{' '}
+                                      <FiUpload style={{ width: '35px' }} />
+                                    </span>
+                                  )}
                                 </div>
-                              </label>
-                            </div>
-                            {/* <div className="col-12 col-lg-3 p-2">
+                              </div>
+                            </label>
+                          </div>
+                          {/* <div className="col-12 col-lg-3 p-2">
                             <Image src="/sample.jpg" className='' alt='' width={100} height={100} ></Image>
                             <p className='mb-0 text-white text-center'>Sample Image</p>
                             </div> */}
-                          </div>
+                          {/* </div> */}
                           {fileSizeError && (
                             <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-2">
                               {fileSizeError}

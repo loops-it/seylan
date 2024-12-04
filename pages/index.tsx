@@ -84,9 +84,10 @@ export default function Home() {
           <div className="slider_container p-0 m-0 position-relative">
             <Link
               className="gallery_link"
-              href="https://sites.techvoice.lk/seylan-ai-backend/api/get-completed-images"
+              href='/imageSwiper'
+              // href="https://sites.techvoice.lk/seylan-ai-backend/api/get-completed-images"
             >
-              <h3>Gallery</h3>
+              <h3>Image Swiper</h3>
             </Link>
             <Swiper
               modules={[Navigation, Pagination, Scrollbar, A11y]}

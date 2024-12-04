@@ -17,38 +17,58 @@ const Terms = () => {
                                 <h2 className="text-white font-36">Terms and Conditions</h2>
                                 <ul style={{ listStyle: 'none' }} className='text-start'>
                                     <li className="text-white font-18 mb-3">
-                                        1.The platform is powered by Commercial Bank of Ceylon PLC (hereinafter referred to as ComBank) and all images generated on the platform must comply with the bank’s terms and conditions.
+                                        1.The platform is powered by Seylan Bank PLC (hereinafter referred to as Seylan) and all
+                                        content generated on the platform must comply with the bank’s terms and conditions
                                     </li>
                                     <li className="text-white font-18 mb-3">
-                                        1.Users of the platform understand and agree that all images generated on the platform are subject to approval by ComBank and that ComBank reserves the right to approve or reject any wish at its sole discretion.
+                                        1.Users of the platform understand and agree that all content generated is subject to
+                                        approval by Seylan. Seylan reserves the right to approve or reject any submission at its
+                                        sole discretion.
+
                                     </li>
                                     <li className="text-white font-18 mb-3">
-                                        3.ComBank’s decision on the approval or rejection of a wish is final and binding.
+                                        3.Seylan’s decision regarding the approval or rejection of submissions is final and binding.
                                     </li>
                                     <li className="text-white font-18 mb-3">
-                                        4.Users are responsible for ensuring that all information provided on the platform is accurate. ComBank will not be held responsible for any inaccuracies or errors in the information provided by the users.
+                                        4.Users are responsible for ensuring that all information provided on the platform is
+                                        accurate. Seylan will not be held responsible for any inaccuracies or errors in the
+                                        information provided by users.
                                     </li>
                                     <li className="text-white font-18 mb-3">
-                                        5.By using this platform users grant consent to ComBank to use their generated images for promotional purposes on all media.
+                                        5.By using this platform, users grant consent to Seylan to use their generated content for
+                                        promotional purposes across all media channels
                                     </li>
                                     <li className="text-white font-18 mb-3">
-                                        6.Users must comply with all applicable laws and regulations when using the platform.
+                                        6.Users must comply with all applicable laws and regulations while using the platform.
+
                                     </li>
                                     <li className="text-white font-18 mb-3">
-                                        7.ComBank reserves the right to terminate a user's access to the platform at any time if it determines that the user has violated these terms and regulations or any other applicable laws or regulations.
+                                        7.Seylan reserves the right to terminate a user's access to the platform at any time if it
+                                        determines that the user has violated these terms and conditions or any applicable laws
+                                        or regulations.
+
                                     </li>
                                     <li className="text-white font-18 mb-3">
-                                        8.These terms and regulations are subject to change at any time at the discretion of ComBank.
+                                        8.These terms and conditions are subject to change at any time at the sole discretion of
+                                        Seylan.
+
                                     </li>
                                     <li className="text-white font-18 mb-3">
-                                        9.We understand that site is directed to a third party host when directed to the UGC platform. and we guarantee that the information stored in it is safe as it is a well known company and it requires explicit customer consent when third-party infrastructure is used for systems exposed to using customer data.
+                                        9.The platform redirects to a third-party host for the User-Generated Content (UGC)
+                                        feature. Seylan guarantees that the information stored is safe, as the hosting is
+                                        managed by a reputable company. Explicit customer consent is obtained when
+                                        third-party infrastructure is used for systems that handle customer data.
+
                                     </li>
                                     <li className="text-white font-18 mb-3">
-                                        10.Since there is personal data collected within the site. the site is aligned with the Personal Data Protection Act
+                                        10.The platform collects personal data in compliance with the Personal Data Protection Act.
+                                        All data handling is aligned with applicable laws and best practices.
+
                                     </li>
                                 </ul>
                                 <p className="text-white font-18 mb-3 text-start ms-2 ms-lg-3">
-                                    By using this platform, users acknowledge and agree to be bound by these terms and regulations.
+                                    By using this platform, users acknowledge and agree to be bound by these terms and
+                                    conditions.
                                 </p>
                             </div>
                         </div>
