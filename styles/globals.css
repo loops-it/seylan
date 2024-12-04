@@ -122,6 +122,20 @@ button {
   opacity: 100%; 
 }
 
+.background_teaser{
+  background-image: url("/bg-teaser.jpg");
+  
+  background-position: top left;
+  background-size: cover;
+  
+  background-repeat: no-repeat;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  width: 100vw;
+  /* background-color: #000;*/
+  opacity: 100%; 
+}
+
 .background_user_details {
   background-image: url("/seylan/form.jpg");
   background-position: top left;
@@ -781,7 +795,7 @@ button {
   }
 
   .home-text{
-    font-size: 40px !important;
+    font-size: 35px !important;
    
   }
 
@@ -863,6 +877,7 @@ button {
 
   .home-txt-container h2{
     margin-top: 0 !important;
+    font-size: 17px !important;
   }
 
   .webcam-input{
@@ -881,10 +896,11 @@ button {
   width: 100vw;
 }
 .home-text{
-  font-size: 78px;
+  font-size: 35px;
   color: #fff;
   font-family: oswald;
 }
+
 .home_slider_image_container {
   width: 100vw;
 }

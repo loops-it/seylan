@@ -40,13 +40,14 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <div className="container-fluid m-0 p-0 background_home">
+        <div className="container-fluid m-0 p-0 background_teaser">
           <div className="home_slider_container p-0 m-0 position-relative">
             <div>
               <div className="home_slider_image_container image1 p-0 m-0">
                 <div className="d-flex justify-content-center align-items-end w-100 hero-container">
                   <div className="d-flex flex-column justify-content-center align-items-center home-txt-container">
-                    <h1 className="text-center home-text px-2">YOU HAVE THE POWER TO CHANGE YOUR FUTURE WITH SEYLAN</h1>
+                    
+                    
                     
                   </div>
                 </div>
@@ -61,9 +62,7 @@ export default function Home() {
                         width: '67%',
                       }}
                     >
-                      At Seylan Bank&apos;s Motor Show, unleash your imagination! Share your
-                      dream vehicle idea, and our AI will transform it into a stunning visual.
-                      Experience innovation like never before, only with Seylan Bank.
+                     Live Your Life, Chase Your Dreams and Capture the moment
                     </h2>
                     <Link
                       href="/getUserDetails"
