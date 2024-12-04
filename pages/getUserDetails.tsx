@@ -427,7 +427,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
                           <select
                             name="gender"
-                            className="mb-3 py-3 px-3 w-100 transparent-input"
+                            className="mb-3 py-3 px-3 w-100 form-select transparent-input"
                             required
                             value={gender}
                             onChange={(e) => setGender(e.currentTarget.value)}
@@ -464,7 +464,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             </span>
                           )}
                           <select
-                            className="mb-3 py-3 px-3 w-100 transparent-input"
+                            className="mb-3 py-3 px-3 w-100 form-select transparent-input"
                             required
                             name="profession"
                             value={profession}
