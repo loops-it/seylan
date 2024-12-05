@@ -98,8 +98,6 @@
 // };
 
 // export default ShareImage;
-
-
 import Layout from '@/components/layout';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
@@ -108,7 +106,7 @@ import { useRouter } from 'next/router';
 const ShareImage = () => {
     const [ambition, setAmbition] = useState('');
     const [imageURL, setImageURL] = useState('');
-    const [downloadStatus, setDownloadStatus] = useState("");
+    const [downloadStatus, setDownloadStatus] = useState('');
 
     const router = useRouter();
     const { id } = router.query;
@@ -148,38 +146,20 @@ const ShareImage = () => {
         }
     }, []);
 
-    const downloadImage = async () => {
-        if (!imageURL) return;
-    
+    const handleDownload = async () => {
         try {
-            // Fetch the image
-            const response = await fetch(imageURL);
-            if (!response.ok) {
-                throw new Error(`Failed to fetch image. Status: ${response.status}`);
-            }
+            if (!id) return;
     
-            // Convert response to blob
-            const blob = await response.blob();
-    
-            // Create a temporary download link
-            const url = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = "image.png"; // Provide the desired filename
-            link.style.display = 'none';
-            document.body.appendChild(link);
-    
-            // Trigger the download
-            link.click();
-    
-            // Clean up
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(url);
-    
-            setDownloadStatus("Downloaded successfully!");
+            const downloadURL = `https://sites.techvoice.lk/seylan-ai-backend/api/download-image/${id}`;
+            const anchor = document.createElement('a');
+            anchor.href = downloadURL;
+            anchor.target = '_blank';
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
         } catch (error) {
-            console.error("Error downloading the image:", error);
-            setDownloadStatus("Failed to download.");
+            console.error('Error downloading the image:', error);
+            setDownloadStatus('Failed to download the image.');
         }
     };
     
@@ -213,7 +193,7 @@ const ShareImage = () => {
                                 <button
                                     className="submit-btn my-3 px-3"
                                     type="button"
-                                    onClick={downloadImage}
+                                    onClick={handleDownload}
                                 >
                                     DOWNLOAD
                                 </button>
@@ -228,4 +208,5 @@ const ShareImage = () => {
 };
 
 export default ShareImage;
+
 
