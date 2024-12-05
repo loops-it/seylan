@@ -63,7 +63,8 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   const [selectedCarImage, setSelectedCarImage] = useState('');
   const [selectedCar, setSelectedCar] = useState(Number);
   const [selectedCarName, setSelectedCarName] = useState('');
-  const [otherProfession,setOtherProfession] = useState('')
+  const [otherProfession, setOtherProfession] = useState('')
+  const [age, setAge] = useState('');
   const videoConstraints = {
     width: 200,
     facingMode: "environment"
@@ -163,6 +164,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   useEffect(() => { }, [
     name,
     gender,
+    age,
     country,
     ambition,
     email,
@@ -173,6 +175,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
     isChecked,
     selectedFile,
     profession,
+
   ]);
 
   // useEffect(() => {
@@ -270,7 +273,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
   console.log(otherProfession);
   // handle function
   const handleSubmit = async (event: { preventDefault: () => void }) => {
-    
+
     event.preventDefault();
     setIsLoading(true);
     console.log('file Added');
@@ -310,14 +313,15 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
             console.error("Error creating Blob:", error);
           }
           formData.append('name', name);
+          formData.append('age', age);
           formData.append('gender', gender);
-          console.log('profession',profession);
-          if(profession == 'Other'){
+          console.log('profession', profession);
+          if (profession == 'Other') {
             formData.append('profession', otherProfession);
-          }else{
+          } else {
             formData.append('profession', profession);
           }
-          
+
           // formData.append('ambition', ambition);
           formData.append('email', email);
           formData.append('phoneNo', phoneNumberWithoutSpaces);
@@ -425,6 +429,14 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             onChange={(e) => setName(e.target.value)}
                           />
 
+                          <input
+                            type="number"
+                            required
+                            placeholder="Age"
+                            className="mb-3 py-3 px-3 w-100 transparent-input"
+                            onChange={(e) => setAge(e.target.value)}
+                          />
+
                           <select
                             name="gender"
                             className="mb-3 py-3 px-3 w-100 form-select transparent-input"
@@ -437,6 +449,8 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             <option value="Female">Female</option>
 
                           </select>
+
+
 
                           <input
                             type="email"
@@ -469,7 +483,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             name="profession"
                             value={profession}
                             onChange={(e) => setProfession(e.currentTarget.value)}
-                            
+
                           >
                             <option value="">Profession</option>
                             <option value="Doctor">Doctor</option>
@@ -493,14 +507,14 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               type="text"
                               placeholder="Enter Your Profession"
                               name="otherProfession"
-                              onChange={(e) => 
+                              onChange={(e) =>
                                 setOtherProfession(e.currentTarget.value)
                               }
 
                             />
-                              
+
                           )}
-                          
+
 
                           {/* <div className="col-12 col-lg-12">
                             {selectedCategory && selectedCategory.value === 'other' && (
@@ -750,7 +764,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               onChange={handleCheckboxChange}
                               required
                             />
-                            <p className='termsAndConditions'> I hereby agree to the <Link style={{color:'red'}} href={'/terms-and-conditions'}>terms and conditions</Link> </p>
+                            <p className='termsAndConditions'> I hereby agree to the <Link style={{ color: 'red' }} href={'/terms-and-conditions'}>terms and conditions</Link> </p>
                           </label>
                           {phoneNoAttempt && (
                             <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">

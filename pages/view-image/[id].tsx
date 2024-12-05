@@ -152,7 +152,7 @@ const ShareImage = () => {
         if (!imageURL) return;
 
         try {
-            const response = await fetch(imageURL);
+            const response = await fetch(imageURL,{ mode: "no-cors" });
             if (!response.ok) {
                 throw new Error(`Failed to fetch image. Status: ${response.status}`);
             }
