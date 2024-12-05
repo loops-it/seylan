@@ -98,8 +98,6 @@
 // };
 
 // export default ShareImage;
-
-
 import Layout from '@/components/layout';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
@@ -108,7 +106,7 @@ import { useRouter } from 'next/router';
 const ShareImage = () => {
     const [ambition, setAmbition] = useState('');
     const [imageURL, setImageURL] = useState('');
-    const [downloadStatus, setDownloadStatus] = useState("");
+    const [downloadStatus, setDownloadStatus] = useState('');
 
     const router = useRouter();
     const { id } = router.query;
@@ -148,32 +146,23 @@ const ShareImage = () => {
         }
     }, []);
 
-    const downloadImage = async () => {
-        if (!imageURL) return;
-
+    const handleDownload = async () => {
         try {
-            const response = await fetch(imageURL,{ mode: "no-cors" });
-            if (!response.ok) {
-                throw new Error(`Failed to fetch image. Status: ${response.status}`);
-            }
-
-            const blob = await response.blob();
-
-            // Create a download link
-            const url = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = "Gen-Z-image.png";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            setDownloadStatus("Downloaded successfully!");
+            if (!id) return;
+    
+            const downloadURL = `https://sites.techvoice.lk/seylan-ai-backend/api/download-image/${id}`;
+            const anchor = document.createElement('a');
+            anchor.href = downloadURL;
+            anchor.target = '_blank';
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
         } catch (error) {
-            console.error("Error downloading the image:", error);
-            setDownloadStatus("Failed to download.");
+            console.error('Error downloading the image:', error);
+            setDownloadStatus('Failed to download the image.');
         }
     };
+    
 
     return (
         <Layout>
@@ -204,7 +193,7 @@ const ShareImage = () => {
                                 <button
                                     className="submit-btn my-3 px-3"
                                     type="button"
-                                    onClick={downloadImage}
+                                    onClick={handleDownload}
                                 >
                                     DOWNLOAD
                                 </button>
@@ -219,4 +208,5 @@ const ShareImage = () => {
 };
 
 export default ShareImage;
+
 
