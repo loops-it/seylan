@@ -750,7 +750,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                               onChange={handleCheckboxChange}
                               required
                             />
-                            <p className='termsAndConditions'> I hereby agree to the terms and conditions</p>
+                            <p className='termsAndConditions'> I hereby agree to the <Link style={{color:'red'}} href={'/terms-and-conditions'}>terms and conditions</Link> </p>
                           </label>
                           {phoneNoAttempt && (
                             <span className="error-message text-danger bg-white px-2 py-1 rounded mb-2 mt-0">

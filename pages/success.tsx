@@ -25,7 +25,8 @@ const Success = () => {
                             <div className='blur_background h-100'></div>
                                 <h2 className="text-white font-36 mt-5">Thank you</h2>
                                 <p className="text-white font-20 mb-3" style={{fontSize: "22px !important", fontWeight:"600 !important"}}>
-                                Your Image is now being generated and you will receive it shortly via email and Whatsapp
+                                {/* Your Image is now being generated and you will receive it shortly via email and Whatsapp */}
+                                Thank you for using Seylan Gen-Z can platform. Download your image using the below link
 
                                 </p>
                                 {/* <p className="text-white font-20 mb-3" style={{fontSize: "22px !important", fontWeight:"600 !important"}}>
