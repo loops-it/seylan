@@ -150,30 +150,39 @@ const ShareImage = () => {
 
     const downloadImage = async () => {
         if (!imageURL) return;
-
+    
         try {
+            // Fetch the image
             const response = await fetch(imageURL);
             if (!response.ok) {
                 throw new Error(`Failed to fetch image. Status: ${response.status}`);
             }
-
+    
+            // Convert response to blob
             const blob = await response.blob();
-
-            // Create a download link
+    
+            // Create a temporary download link
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = "Gen-Z-image.png";
+            link.download = "image.png"; // Provide the desired filename
+            link.style.display = 'none';
             document.body.appendChild(link);
+    
+            // Trigger the download
             link.click();
+    
+            // Clean up
             document.body.removeChild(link);
-
+            window.URL.revokeObjectURL(url);
+    
             setDownloadStatus("Downloaded successfully!");
         } catch (error) {
             console.error("Error downloading the image:", error);
             setDownloadStatus("Failed to download.");
         }
     };
+    
 
     return (
         <Layout>
